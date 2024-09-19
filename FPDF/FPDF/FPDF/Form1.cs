@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,9 +26,14 @@ namespace FPDF
             {
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    axAcroPDF.src = ofd.FileName;
+                    this.axAcroPDF.src = ofd.FileName;
                 }
             }
+        }
+
+        private void save_Click(object sender, EventArgs e)
+        {
+            this.axAcroPDF.Print();
         }
     }
 }

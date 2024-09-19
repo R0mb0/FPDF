@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{37FD5C32-02D2-414D-8F47-0BFEAEFC4C3E}</ProjectGuid>
+    <ProjectGuid>{B73D6A06-7058-4912-A85D-F40305BDA8A1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>FPDF</RootNamespace>
     <AssemblyName>FPDF</AssemblyName>
