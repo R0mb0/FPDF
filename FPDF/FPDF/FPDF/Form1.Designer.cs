@@ -28,62 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.axAcroPDF = new AxAcroPDFLib.AxAcroPDF();
-            this.select = new System.Windows.Forms.Button();
-            this.save = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF)).BeginInit();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.SuspendLayout();
             // 
-            // axAcroPDF
+            // richTextBox1
             // 
-            this.axAcroPDF.Enabled = true;
-            this.axAcroPDF.Location = new System.Drawing.Point(12, 12);
-            this.axAcroPDF.Name = "axAcroPDF";
-            this.axAcroPDF.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axAcroPDF.OcxState")));
-            this.axAcroPDF.Size = new System.Drawing.Size(993, 601);
-            this.axAcroPDF.TabIndex = 0;
+            this.richTextBox1.Location = new System.Drawing.Point(12, 36);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(579, 360);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "";
             // 
-            // select
+            // menuStrip1
             // 
-            this.select.Location = new System.Drawing.Point(1011, 42);
-            this.select.Name = "select";
-            this.select.Size = new System.Drawing.Size(75, 23);
-            this.select.TabIndex = 1;
-            this.select.Text = "Select";
-            this.select.UseVisualStyleBackColor = true;
-            this.select.Click += new System.EventHandler(this.select_Click);
-            // 
-            // save
-            // 
-            this.save.Location = new System.Drawing.Point(1011, 100);
-            this.save.Name = "save";
-            this.save.Size = new System.Drawing.Size(75, 23);
-            this.save.TabIndex = 2;
-            this.save.Text = "Save";
-            this.save.UseVisualStyleBackColor = true;
-            this.save.Click += new System.EventHandler(this.save_Click);
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(742, 24);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "menuStrip1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1098, 625);
-            this.Controls.Add(this.save);
-            this.Controls.Add(this.select);
-            this.Controls.Add(this.axAcroPDF);
+            this.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.ClientSize = new System.Drawing.Size(742, 544);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private AxAcroPDFLib.AxAcroPDF axAcroPDF;
-        private System.Windows.Forms.Button select;
-        private System.Windows.Forms.Button save;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
     }
 }
 
