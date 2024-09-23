@@ -46,7 +46,7 @@
             // 
             // pdfTextBox
             // 
-            this.pdfTextBox.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pdfTextBox.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pdfTextBox.Location = new System.Drawing.Point(14, 42);
             this.pdfTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.pdfTextBox.Name = "pdfTextBox";
@@ -126,6 +126,7 @@
             this.bSave.TabIndex = 5;
             this.bSave.Text = "Salva";
             this.bSave.UseVisualStyleBackColor = true;
+            this.bSave.Click += new System.EventHandler(this.bSave_Click);
             // 
             // bNew
             // 
