@@ -8,13 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+/*--New Imports--*/
+using System.IO;
+
 namespace FPDF
 {
-    public partial class Form1 : Form
+    public partial class FPDF : Form
     {
-        public Form1()
+        public FPDF()
         {
             InitializeComponent();
+        }
+
+        private void bNew_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
