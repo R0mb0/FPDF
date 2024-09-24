@@ -17,6 +17,9 @@ using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 
+/*--Aspose--*/
+using Aspose.Words;
+
 namespace FPDF
 {
     public partial class FPDF : Form
@@ -44,7 +47,7 @@ namespace FPDF
 
             try 
             {
-
+                /*
                 using (PdfReader pdfReader = new PdfReader(path))
                 {
                     using (PdfDocument pdfDocument = new PdfDocument(pdfReader))
@@ -58,7 +61,10 @@ namespace FPDF
                         }
                     }
                 }
+                */
 
+                Aspose.Words.Document pdf = new Aspose.Words.Document(path);
+                this.pdfTextBox.AppendText(pdf.GetText());
 
             }
             catch (Exception ex)
@@ -76,9 +82,9 @@ namespace FPDF
                 {
                     PdfWriter writer = new PdfWriter(path);
                     PdfDocument pdf = new PdfDocument(writer);
-                    Document document = new Document(pdf);
+                    iText.Layout.Document document = new iText.Layout.Document(pdf);
 
-                    Paragraph paragraph = new Paragraph(this.pdfTextBox.Text);
+                    iText.Layout.Element.Paragraph paragraph = new iText.Layout.Element.Paragraph(this.pdfTextBox.Text);
 
                     document.Add(paragraph);
                     document.Close();
