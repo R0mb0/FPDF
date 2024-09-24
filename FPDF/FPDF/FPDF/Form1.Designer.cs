@@ -43,6 +43,7 @@
             this.bHistoric = new System.Windows.Forms.Button();
             this.bSend = new System.Windows.Forms.Button();
             this.loading = new System.Windows.Forms.PictureBox();
+            this.delete = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
             this.SuspendLayout();
@@ -190,12 +191,24 @@
             this.loading.TabIndex = 9;
             this.loading.TabStop = false;
             // 
+            // delete
+            // 
+            this.delete.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.delete.Location = new System.Drawing.Point(624, 227);
+            this.delete.Name = "delete";
+            this.delete.Size = new System.Drawing.Size(75, 23);
+            this.delete.TabIndex = 10;
+            this.delete.Text = "Cancella";
+            this.delete.UseVisualStyleBackColor = true;
+            this.delete.Click += new System.EventHandler(this.delete_Click);
+            // 
             // FPDF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(723, 554);
+            this.Controls.Add(this.delete);
             this.Controls.Add(this.loading);
             this.Controls.Add(this.bSend);
             this.Controls.Add(this.bHistoric);
@@ -233,6 +246,7 @@
         private System.Windows.Forms.Button bHistoric;
         private System.Windows.Forms.Button bSend;
         private System.Windows.Forms.PictureBox loading;
+        private System.Windows.Forms.Button delete;
     }
 }
 
