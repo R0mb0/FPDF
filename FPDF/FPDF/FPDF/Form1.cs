@@ -17,9 +17,6 @@ using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 
-/*--Aspose--*/
-using Aspose.Words;
-
 namespace FPDF
 {
     public partial class FPDF : Form
@@ -31,12 +28,13 @@ namespace FPDF
         public FPDF()
         {
             InitializeComponent();
+            this.loading.Hide();
         }
 
         /*New Button*/
         private void bNew_Click(object sender, EventArgs e)
         {
-
+            
             using (OpenFileDialog ofd = new OpenFileDialog() { ValidateNames = true, Multiselect = false, Filter = "PDF|*.pdf" })
             {
                 if (ofd.ShowDialog() == DialogResult.OK)
@@ -45,9 +43,14 @@ namespace FPDF
                 }
             }
 
+            /*Show loading image*/
+            this.loading.Show();
+            /*Reset text boc*/
+            this.pdfTextBox.Clear();
+            
             try 
             {
-                /*
+                
                 using (PdfReader pdfReader = new PdfReader(path))
                 {
                     using (PdfDocument pdfDocument = new PdfDocument(pdfReader))
@@ -61,16 +64,15 @@ namespace FPDF
                         }
                     }
                 }
-                */
-
-                Aspose.Words.Document pdf = new Aspose.Words.Document(path);
-                this.pdfTextBox.AppendText(pdf.GetText());
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
+            /*Hide loading images*/
+            this.loading.Hide();
         }
 
         /*Save Button*/
@@ -98,6 +100,8 @@ namespace FPDF
             {
                 MessageBox.Show("Non è stato aperto un documento");
             }
+
+            this.loading.Hide();
         }
     }
 }

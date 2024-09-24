@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FPDF));
             this.pdfTextBox = new System.Windows.Forms.RichTextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.mailTextBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.userMailTextBox = new System.Windows.Forms.TextBox();
             this.userTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -39,9 +42,9 @@
             this.bNew = new System.Windows.Forms.Button();
             this.bHistoric = new System.Windows.Forms.Button();
             this.bSend = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.mailTextBox = new System.Windows.Forms.TextBox();
+            this.loading = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
             this.SuspendLayout();
             // 
             // pdfTextBox
@@ -78,6 +81,25 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(576, 120);
             this.panel1.TabIndex = 2;
+            // 
+            // mailTextBox
+            // 
+            this.mailTextBox.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mailTextBox.Location = new System.Drawing.Point(283, 37);
+            this.mailTextBox.Multiline = true;
+            this.mailTextBox.Name = "mailTextBox";
+            this.mailTextBox.Size = new System.Drawing.Size(265, 73);
+            this.mailTextBox.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(338, 11);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(143, 23);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Email Destinatari";
             // 
             // userMailTextBox
             // 
@@ -159,24 +181,14 @@
             this.bSend.Text = "Invia";
             this.bSend.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // loading
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(338, 11);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(143, 23);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Email Destinatari";
-            // 
-            // mailTextBox
-            // 
-            this.mailTextBox.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mailTextBox.Location = new System.Drawing.Point(283, 37);
-            this.mailTextBox.Multiline = true;
-            this.mailTextBox.Name = "mailTextBox";
-            this.mailTextBox.Size = new System.Drawing.Size(265, 73);
-            this.mailTextBox.TabIndex = 5;
+            this.loading.Image = ((System.Drawing.Image)(resources.GetObject("loading.Image")));
+            this.loading.Location = new System.Drawing.Point(75, 79);
+            this.loading.Name = "loading";
+            this.loading.Size = new System.Drawing.Size(438, 285);
+            this.loading.TabIndex = 9;
+            this.loading.TabStop = false;
             // 
             // FPDF
             // 
@@ -184,6 +196,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(723, 554);
+            this.Controls.Add(this.loading);
             this.Controls.Add(this.bSend);
             this.Controls.Add(this.bHistoric);
             this.Controls.Add(this.bNew);
@@ -198,6 +211,7 @@
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,6 +232,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button bHistoric;
         private System.Windows.Forms.Button bSend;
+        private System.Windows.Forms.PictureBox loading;
     }
 }
 
