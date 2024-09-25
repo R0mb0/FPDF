@@ -17,6 +17,7 @@ using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 using System.Windows.Controls;
+using org.apache.tika.parser.rtf;
 /**/
 
 
@@ -105,25 +106,25 @@ namespace FPDF
         private void bSave_Click(object sender, EventArgs e)
         {
 
-            System.Windows.Forms.SaveFileDialog saveFileDialog1;
+           /* System.Windows.Forms.SaveFileDialog saveFileDialog1;
             saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             DialogResult dr = saveFileDialog1.ShowDialog();
             if (dr == DialogResult.OK)
             {
                 filename = saveFileDialog1.FileName;
                 //save file using stream.
-            }
+            }*/
 
 
             //if (this.path != null) 
             //{
-            try
+           /* try
                 {
                     PdfWriter writer = new PdfWriter(filename);
                     iText.Kernel.Pdf.PdfDocument pdf = new iText.Kernel.Pdf.PdfDocument(writer);
                     iText.Layout.Document document = new iText.Layout.Document(pdf);
 
-                    iText.Layout.Element.Paragraph paragraph = new iText.Layout.Element.Paragraph(this.pdfTextBox.Text);
+                    iText.Layout.Element.Paragraph paragraph = new iText.Layout.Element.Paragraph();
 
                     document.Add(paragraph);
                     document.Close();
@@ -131,14 +132,14 @@ namespace FPDF
                 catch (Exception ex) 
                 {
                     MessageBox.Show(ex.Message);
-                }
+                }*/
             /*}
             else
             {
                 MessageBox.Show("Non è stato aperto un documento");
             }*/
 
-            this.loading.Hide();
+            //this.loading.Hide();
         }
 
         /*Reset buttons*/
