@@ -70,27 +70,8 @@ namespace FPDF
             PdfToHtmlNet.Converter converter = new PdfToHtmlNet.Converter();
             converter.ConvertToFile(this.PDFpath,this.HTMLpath);
 
-            /*Load HTML to RichTextBox*/
-            /*
-            WebBrowser wb = new WebBrowser();
-            wb.Navigate("about:blank");
-
-            wb.Document.Write(File.ReadAllText(this.HTMLpath));
-            wb.Document.ExecCommand("SelectAll", false, null);
-            wb.Document.ExecCommand("Copy", false, null);
-
-            this.pdfTextBox.SelectAll();
-            this.pdfTextBox.Paste();*/
-
-            // this.pdfTextBox.Text = MarkupConverter.HtmlToRtfConverter.ConvertHtmlToRtf(File.ReadAllText(this.HTMLpath));
-            //this.pdfTextBox.LoadFile(MarkupConverter.HtmlToRtfConverter.ConvertHtmlToRtf(File.ReadAllText(this.HTMLpath)));
             this.pdfTextBox.LoadFile(new MemoryStream(Encoding.UTF8.GetBytes((MarkupConverter.HtmlToRtfConverter.ConvertHtmlToRtf(File.ReadAllText(this.HTMLpath))))), RichTextBoxStreamType.RichText);
 
-
-            /*
-            // Load the contents of the file into the RichTextBox.
-            this.pdfTextBox.LoadFile(path);
-            */
 
             /*Hide loading images*/
             this.loading.Hide();
@@ -102,6 +83,9 @@ namespace FPDF
             //This works great only if the path is in pdf format
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             HtmlConverter.ConvertToPdf(Rtf.ToHtml(this.pdfTextBox.Rtf.ToString()), new FileStream(this.PDFpath, FileMode.Create));
+
+            /*Send a postivie message*/
+            MessageBox.Show("Il documento è stato inviato");
             
         }
 
