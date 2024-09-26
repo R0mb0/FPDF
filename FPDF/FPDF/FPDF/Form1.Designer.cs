@@ -171,6 +171,7 @@
             this.bHistoric.TabIndex = 7;
             this.bHistoric.Text = "Storico";
             this.bHistoric.UseVisualStyleBackColor = true;
+            this.bHistoric.Click += new System.EventHandler(this.bHistoric_Click);
             // 
             // bSend
             // 
