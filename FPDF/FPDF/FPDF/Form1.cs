@@ -3,6 +3,7 @@ using iText.Kernel.Pdf;
 using RtfPipe;
 using System;
 using System.IO;
+using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
@@ -72,6 +73,8 @@ namespace FPDF
 
             this.pdfTextBox.LoadFile(new MemoryStream(Encoding.UTF8.GetBytes((MarkupConverter.HtmlToRtfConverter.ConvertHtmlToRtf(File.ReadAllText(this.HTMLpath))))), RichTextBoxStreamType.RichText);
 
+            /*Delete html temp file*/
+            File.Delete(this.HTMLpath);
 
             /*Hide loading images*/
             this.loading.Hide();
