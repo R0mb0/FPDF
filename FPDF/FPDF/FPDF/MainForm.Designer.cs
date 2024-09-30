@@ -43,7 +43,7 @@
             this.bHistoric = new System.Windows.Forms.Button();
             this.bSend = new System.Windows.Forms.Button();
             this.loading = new System.Windows.Forms.PictureBox();
-            this.delete = new System.Windows.Forms.Button();
+            this.bDelete = new System.Windows.Forms.Button();
             this.bLoad = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -197,16 +197,16 @@
             this.loading.TabIndex = 9;
             this.loading.TabStop = false;
             // 
-            // delete
+            // bDelete
             // 
-            this.delete.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.delete.Location = new System.Drawing.Point(10, 74);
-            this.delete.Name = "delete";
-            this.delete.Size = new System.Drawing.Size(75, 23);
-            this.delete.TabIndex = 10;
-            this.delete.Text = "Cancella";
-            this.delete.UseVisualStyleBackColor = true;
-            this.delete.Click += new System.EventHandler(this.delete_Click);
+            this.bDelete.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bDelete.Location = new System.Drawing.Point(10, 74);
+            this.bDelete.Name = "bDelete";
+            this.bDelete.Size = new System.Drawing.Size(75, 23);
+            this.bDelete.TabIndex = 10;
+            this.bDelete.Text = "Cancella";
+            this.bDelete.UseVisualStyleBackColor = true;
+            this.bDelete.Click += new System.EventHandler(this.bDelete_Click);
             // 
             // bLoad
             // 
@@ -230,7 +230,7 @@
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.panel3.Controls.Add(this.bSend);
-            this.panel3.Controls.Add(this.delete);
+            this.panel3.Controls.Add(this.bDelete);
             this.panel3.Location = new System.Drawing.Point(614, 422);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(97, 120);
@@ -291,7 +291,7 @@
         private System.Windows.Forms.Button bHistoric;
         private System.Windows.Forms.Button bSend;
         private System.Windows.Forms.PictureBox loading;
-        private System.Windows.Forms.Button delete;
+        private System.Windows.Forms.Button bDelete;
         private System.Windows.Forms.Button bLoad;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;

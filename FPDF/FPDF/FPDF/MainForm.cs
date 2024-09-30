@@ -34,11 +34,44 @@ namespace FPDF
         }
 
         /*--Private methods--*/
+
+        /*Change element on a string*/
         private string ChangeString(string original, string find, string replace) 
         {
             StringBuilder builder = new StringBuilder(original);
             builder.Replace(find, replace);
             return builder.ToString();
+        }
+
+        /*Enable all buttons*/
+        private void EnableAll() 
+        {
+            this.bNew.Enabled = true;
+            this.bSave.Enabled = true;
+            this.bLoad.Enabled = true;
+            this.bHistoric.Enabled = true;
+            this.bSend.Enabled = true;
+            //this.bDelete.Enabled = true;
+        }
+
+        /*Check is a string starts with the strings to check */
+        private bool stringStartsWith(string stringtoCheck, string[] stringsToChecks) 
+        {
+            foreach (var item in stringsToChecks)
+            {
+                if (stringtoCheck.StartsWith(item)) 
+                { 
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /*Remove Page number from string*/
+        private string RemoveLineFromFile(string path, string[] stringstoRemove)
+        {
+            return string.Join("", File.ReadLines(path).Where(line => !stringStartsWith(line, stringstoRemove))); 
         }
 
         /*New Button*/
@@ -52,10 +85,7 @@ namespace FPDF
             // Create an OpenFileDialog to request a file to open.
             OpenFileDialog openFile1 = new OpenFileDialog();
 
-            // Initialize the OpenFileDialog to look for RTF files.
-            //openFile1.DefaultExt = "*.rtf";
-            //openFile1.Filter = "RTF Files|*.rtf";
-
+            // Initialize OpenFileDialog to open pdf files.
             openFile1.DefaultExt = "*.pdf";
             openFile1.Filter = "PDF Files|*.pdf";
 
@@ -71,10 +101,15 @@ namespace FPDF
             PdfToHtmlNet.Converter converter = new PdfToHtmlNet.Converter();
             converter.ConvertToFile(this.PDFpath,this.HTMLpath);
 
-            this.pdfTextBox.LoadFile(new MemoryStream(Encoding.UTF8.GetBytes((MarkupConverter.HtmlToRtfConverter.ConvertHtmlToRtf(File.ReadAllText(this.HTMLpath))))), RichTextBoxStreamType.RichText);
+            /*Prepare strings to check*/
+            string[] stringsToRemove = new string[2];
+            stringsToRemove[0] = "<div style=\"position:absolute; top:50px;\"><a name=\"1\">Page";
+            stringsToRemove[1] = "<div style=\"position:absolute; top:0px;\">Page:";
+
+            this.pdfTextBox.LoadFile(new MemoryStream(Encoding.UTF8.GetBytes((MarkupConverter.HtmlToRtfConverter.ConvertHtmlToRtf(RemoveLineFromFile(this.HTMLpath, stringsToRemove))))), RichTextBoxStreamType.RichText);
 
             /*Delete html temp file*/
-            File.Delete(this.HTMLpath);
+            //File.Delete(this.HTMLpath);
 
             /*Hide loading images*/
             this.loading.Hide();
@@ -99,7 +134,7 @@ namespace FPDF
         }
 
         /*Reset buttons*/
-        private void delete_Click(object sender, EventArgs e)
+        private void bDelete_Click(object sender, EventArgs e)
         {
             this.pdfTextBox.Clear();
         }
