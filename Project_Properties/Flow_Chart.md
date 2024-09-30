@@ -31,7 +31,7 @@ graph TD;
                                        - Reset disabled buttons
                                        - Disable _send button_
                                        - Reset the Panel
-                                       - Open a message box to show (_saved successfully_)/]
+                                       - Open a message box to show _saved successfully_/]
   C == Click to _load button_ ==> G[Load panel
 
                                     - Clear text panel
