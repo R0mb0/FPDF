@@ -7,4 +7,4 @@
 - [ ] Create a form for the "new button" to select files from database.
 - [ ] Program "save-button" for save files in a specific dir
 - [ ] Create a form for the "historic button" to select and open old files.
-- [ ] Program "send button" to send via mail the loaded document and save it into database
+- [ ] Program "send button" to send via mail the loaded document and save it into database.
