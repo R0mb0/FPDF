@@ -18,8 +18,8 @@ graph TD;
   A[Login Panel] == Interact with ==> B[/Database/]
   C[Main Panel] == (at starting) Loads ==> A
   C == Click to _new button_ ==> D[New Panel
-
-                                     Clear text panel
+  
+                                    Clear text panel
                                     Select and download the required document
                                     Show the document
                                     Reset disabled buttons
@@ -40,15 +40,15 @@ graph TD;
                                     Disable _new button_ and _historic button_]
   C == Click to _historic button_ ==> H[Historic panel
 
-                                        +   Clear text panel
-                                        +   Select and show the required document from _historic forlder_
-                                        +   Reset disabled buttons
-                                        +   Disable _save button_ and _send button_]
- C == Click to _send button_ ==> I[/ +   Clear text panel
-                                     +   Send document to database
-                                     +   Send mails to addressees
-                                     +   Move the actual document to _historic folder_/]
+                                        Clear text panel
+                                        Select and show the required document from _historic forlder_
+                                        Reset disabled buttons
+                                        Disable _save button_ and _send button_]
+ C == Click to _send button_ ==> I[/ Clear text panel
+                                     Send document to database
+                                     Send mails to addressees
+                                     Move the actual document to _historic folder_/]
  I == Comunicate with ==> J[/Database/]
- C == Click to _reset button_ ==> K[/ +   Clear text panel
-                                      +   Reset disabled buttons/]
+ C == Click to _reset button_ ==> K[/ Clear text panel
+                                      Reset disabled buttons/]
 ```
