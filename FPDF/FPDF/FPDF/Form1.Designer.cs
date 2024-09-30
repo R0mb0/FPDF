@@ -44,8 +44,13 @@
             this.bSend = new System.Windows.Forms.Button();
             this.loading = new System.Windows.Forms.PictureBox();
             this.delete = new System.Windows.Forms.Button();
+            this.bLoad = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // pdfTextBox
@@ -165,7 +170,7 @@
             // bHistoric
             // 
             this.bHistoric.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bHistoric.Location = new System.Drawing.Point(624, 139);
+            this.bHistoric.Location = new System.Drawing.Point(624, 280);
             this.bHistoric.Name = "bHistoric";
             this.bHistoric.Size = new System.Drawing.Size(75, 23);
             this.bHistoric.TabIndex = 7;
@@ -176,7 +181,7 @@
             // bSend
             // 
             this.bSend.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bSend.Location = new System.Drawing.Point(624, 182);
+            this.bSend.Location = new System.Drawing.Point(10, 28);
             this.bSend.Name = "bSend";
             this.bSend.Size = new System.Drawing.Size(75, 23);
             this.bSend.TabIndex = 8;
@@ -195,7 +200,7 @@
             // delete
             // 
             this.delete.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.delete.Location = new System.Drawing.Point(624, 227);
+            this.delete.Location = new System.Drawing.Point(10, 74);
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(75, 23);
             this.delete.TabIndex = 10;
@@ -203,21 +208,59 @@
             this.delete.UseVisualStyleBackColor = true;
             this.delete.Click += new System.EventHandler(this.delete_Click);
             // 
+            // bLoad
+            // 
+            this.bLoad.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bLoad.Location = new System.Drawing.Point(624, 135);
+            this.bLoad.Name = "bLoad";
+            this.bLoad.Size = new System.Drawing.Size(75, 23);
+            this.bLoad.TabIndex = 11;
+            this.bLoad.Text = "Carica";
+            this.bLoad.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.panel2.Location = new System.Drawing.Point(614, 42);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(97, 137);
+            this.panel2.TabIndex = 12;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.panel3.Controls.Add(this.bSend);
+            this.panel3.Controls.Add(this.delete);
+            this.panel3.Location = new System.Drawing.Point(614, 422);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(97, 120);
+            this.panel3.TabIndex = 13;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.panel4.Location = new System.Drawing.Point(614, 259);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(97, 67);
+            this.panel4.TabIndex = 14;
+            // 
             // FPDF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(723, 554);
-            this.Controls.Add(this.delete);
+            this.Controls.Add(this.bLoad);
             this.Controls.Add(this.loading);
-            this.Controls.Add(this.bSend);
             this.Controls.Add(this.bHistoric);
             this.Controls.Add(this.bNew);
             this.Controls.Add(this.bSave);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pdfTextBox);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel4);
             this.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -226,6 +269,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,6 +292,10 @@
         private System.Windows.Forms.Button bSend;
         private System.Windows.Forms.PictureBox loading;
         private System.Windows.Forms.Button delete;
+        private System.Windows.Forms.Button bLoad;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
     }
 }
 
