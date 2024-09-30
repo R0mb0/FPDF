@@ -48,7 +48,7 @@ graph TD;
                                      - Send document to database
                                      - Send mails to addressees
                                      - Move the actual document to _historic folder_/]
- I == Comunicate with ==> [/Database/]
+ I == Comunicate with ==> J[/Database/]
  C == Click to _reset button_ ==> K[/ - Clear text panel
                                       - Reset disabled buttons/]
 ```
