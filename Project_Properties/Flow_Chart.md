@@ -17,8 +17,7 @@
 graph TD;
   A[Login Panel] == Interact with ==> B[/Database/]
   C[Main Panel] == (at starting) Loads ==> A
-  C == Click to _new button_ ==> D[New Panel
-  
+  C == Click to _new button_ ==> D[**New Panel**
                                     Clear text panel
                                     Select and download the required document
                                     Show the document
@@ -32,14 +31,12 @@ graph TD;
                                        Disable _send button_
                                        Reset the Panel
                                        Open a message box to show _saved successfully_/]
-  C == Click to _load button_ ==> G[Load panel
-
+  C == Click to _load button_ ==> G[**Load panel**
                                     Clear text panel
                                     Select and show the required document from _saved document folder_
                                     Reset disabled buttons
                                     Disable _new button_ and _historic button_]
-  C == Click to _historic button_ ==> H[Historic panel
-
+  C == Click to _historic button_ ==> H[**Historic panel**
                                         Clear text panel
                                         Select and show the required document from _historic forlder_
                                         Reset disabled buttons
