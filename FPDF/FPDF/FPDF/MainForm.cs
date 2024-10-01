@@ -22,14 +22,22 @@ namespace FPDF
     public partial class FPDF : Form
     {
         /*--Variables--*/
+
+        /*Working varaibles*/
         private string PDFpath;
         private string HTMLpath;
-        //private string filename;
+
+        /*form vasriables*/
+        private LoginForm login = new LoginForm();
 
         /*--Builder--*/
         public FPDF()
         {
             InitializeComponent();
+
+            /*Load login form*/
+            login.ShowDialog();
+
             this.loading.Hide();
         }
 
