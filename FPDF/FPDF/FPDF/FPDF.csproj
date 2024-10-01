@@ -261,7 +261,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Daabase\Database.cs" />
+    <Compile Include="Database\Database.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>

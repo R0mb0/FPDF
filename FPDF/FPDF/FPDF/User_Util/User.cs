@@ -33,17 +33,18 @@ namespace FPDF.User_Util
         }
 
         /*Singleton patern*/
-        public User getUser(string Email, string Name = null, string Surname = null, string Number = null)
+        public static User getUser(string Email, string Name = null, string Surname = null, string Number = null)
         {
             if (user == null)
             {
-                user = new User(Email, Name, Surname, Number); 
-                return user;
+                user = new User(Email, Name, Surname, Number);
             }
-            else 
-            {
-                return user;
-            }
+            return user;
+        }
+
+        public static User getUser() 
+        {
+            return user;
         }
 
         /*--Retrieve fields--*/

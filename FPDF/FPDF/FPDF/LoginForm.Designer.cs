@@ -52,7 +52,7 @@
             this.tMail.Location = new System.Drawing.Point(17, 102);
             this.tMail.Name = "tMail";
             this.tMail.Size = new System.Drawing.Size(356, 23);
-            this.tMail.TabIndex = 1;
+            this.tMail.TabIndex = 2;
             // 
             // tPassword
             // 
@@ -60,7 +60,7 @@
             this.tPassword.Name = "tPassword";
             this.tPassword.PasswordChar = '*';
             this.tPassword.Size = new System.Drawing.Size(356, 23);
-            this.tPassword.TabIndex = 2;
+            this.tPassword.TabIndex = 3;
             // 
             // label2
             // 
@@ -88,7 +88,7 @@
             this.bLogin.Location = new System.Drawing.Point(129, 232);
             this.bLogin.Name = "bLogin";
             this.bLogin.Size = new System.Drawing.Size(121, 58);
-            this.bLogin.TabIndex = 5;
+            this.bLogin.TabIndex = 1;
             this.bLogin.Text = "Accedi";
             this.bLogin.UseVisualStyleBackColor = true;
             this.bLogin.Click += new System.EventHandler(this.bLogin_Click);

@@ -9,13 +9,7 @@ using System.Text;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Xml.Linq;
-/*--New Imports--*/
-
-/**/
-
-
-/*--My Classes--*/
-//using FPDF.PDF_Util;
+using FPDF.User_Util;
 
 namespace FPDF
 {
@@ -29,16 +23,23 @@ namespace FPDF
 
         /*form vasriables*/
         private LoginForm login = new LoginForm();
+        private User user;
 
         /*--Builder--*/
         public FPDF()
         {
             InitializeComponent();
 
+            /*hide loading panel*/
+            this.loading.Hide();
+
             /*Load login form*/
             login.ShowDialog();
+            this.user = this.login.user
 
-            this.loading.Hide();
+            this.tUserName.Text = user.obtainName();
+            this.tUserMail.Text = user.getMail();
+
         }
 
         /*--Private methods--*/

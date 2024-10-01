@@ -32,10 +32,10 @@
             this.pdfTextBox = new System.Windows.Forms.RichTextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.mailTextBox = new System.Windows.Forms.TextBox();
+            this.tMails = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.userMailTextBox = new System.Windows.Forms.TextBox();
-            this.userTextBox = new System.Windows.Forms.TextBox();
+            this.tUserMail = new System.Windows.Forms.TextBox();
+            this.tUserName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.bSave = new System.Windows.Forms.Button();
@@ -76,10 +76,10 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.panel1.Controls.Add(this.mailTextBox);
+            this.panel1.Controls.Add(this.tMails);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.userMailTextBox);
-            this.panel1.Controls.Add(this.userTextBox);
+            this.panel1.Controls.Add(this.tUserMail);
+            this.panel1.Controls.Add(this.tUserName);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(14, 422);
@@ -88,14 +88,15 @@
             this.panel1.Size = new System.Drawing.Size(576, 120);
             this.panel1.TabIndex = 2;
             // 
-            // mailTextBox
+            // tMails
             // 
-            this.mailTextBox.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mailTextBox.Location = new System.Drawing.Point(283, 37);
-            this.mailTextBox.Multiline = true;
-            this.mailTextBox.Name = "mailTextBox";
-            this.mailTextBox.Size = new System.Drawing.Size(265, 73);
-            this.mailTextBox.TabIndex = 5;
+            this.tMails.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tMails.Location = new System.Drawing.Point(283, 37);
+            this.tMails.Multiline = true;
+            this.tMails.Name = "tMails";
+            this.tMails.ReadOnly = true;
+            this.tMails.Size = new System.Drawing.Size(265, 73);
+            this.tMails.TabIndex = 5;
             // 
             // label3
             // 
@@ -107,21 +108,23 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Email Destinatari";
             // 
-            // userMailTextBox
+            // tUserMail
             // 
-            this.userMailTextBox.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userMailTextBox.Location = new System.Drawing.Point(7, 87);
-            this.userMailTextBox.Name = "userMailTextBox";
-            this.userMailTextBox.Size = new System.Drawing.Size(209, 28);
-            this.userMailTextBox.TabIndex = 3;
+            this.tUserMail.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tUserMail.Location = new System.Drawing.Point(7, 87);
+            this.tUserMail.Name = "tUserMail";
+            this.tUserMail.ReadOnly = true;
+            this.tUserMail.Size = new System.Drawing.Size(209, 28);
+            this.tUserMail.TabIndex = 3;
             // 
-            // userTextBox
+            // tUserName
             // 
-            this.userTextBox.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userTextBox.Location = new System.Drawing.Point(7, 37);
-            this.userTextBox.Name = "userTextBox";
-            this.userTextBox.Size = new System.Drawing.Size(209, 26);
-            this.userTextBox.TabIndex = 2;
+            this.tUserName.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tUserName.Location = new System.Drawing.Point(7, 37);
+            this.tUserName.Name = "tUserName";
+            this.tUserName.ReadOnly = true;
+            this.tUserName.Size = new System.Drawing.Size(209, 26);
+            this.tUserName.TabIndex = 2;
             // 
             // label2
             // 
@@ -281,12 +284,12 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox userMailTextBox;
-        private System.Windows.Forms.TextBox userTextBox;
+        private System.Windows.Forms.TextBox tUserMail;
+        private System.Windows.Forms.TextBox tUserName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button bSave;
         private System.Windows.Forms.Button bNew;
-        private System.Windows.Forms.TextBox mailTextBox;
+        private System.Windows.Forms.TextBox tMails;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button bHistoric;
         private System.Windows.Forms.Button bSend;
