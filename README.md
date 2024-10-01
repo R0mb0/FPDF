@@ -2,7 +2,7 @@
 
 ## Credentials to pass login form
 
-- Email: ` f.rombaldoni@campus.uniurb.it`
+- Email: `f.rombaldoni@campus.uniurb.it`
 - Password: `R0mb0`
 
 ## ⚠️ Dependencies ⚠️
