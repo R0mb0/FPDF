@@ -30,7 +30,7 @@ namespace FPDF
             {
 
                 // Part to make some tests
-                if (this.tMail.Text == "f.rombaldoni@campus.uniurb.it" & this.tPassword.Text == "R0mb0")
+                if (this.tMail.Text == "example@gmail.com" & this.tPassword.Text == "R0mb0")
                 {
                     user = User.getUser(this.tMail.Text, "Francesco", "Rombaldoni", "1234");
                     

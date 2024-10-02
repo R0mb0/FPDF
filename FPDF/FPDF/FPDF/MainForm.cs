@@ -18,8 +18,8 @@ namespace FPDF
         /*--Variables--*/
 
         /*Working varaibles*/
-        private string PDFpath;
-        private string HTMLpath;
+        private string PDFpath = null;
+        private string HTMLpath = null;
 
         /*form vasriables*/
         private LoginForm login = new LoginForm();
@@ -68,7 +68,7 @@ namespace FPDF
         {
             foreach (var item in stringsToChecks)
             {
-                if (stringtoCheck.StartsWith(item)) 
+                if (stringtoCheck.StartsWith(item) || stringtoCheck.Contains(item))
                 { 
                     return true;
                 }
@@ -105,20 +105,33 @@ namespace FPDF
                 this.PDFpath = openFile1.FileName;
             }
 
-            /*Convert pdf to html*/
-            this.HTMLpath = ChangeString(this.PDFpath, ".pdf", ".html");
-            PdfToHtmlNet.Converter converter = new PdfToHtmlNet.Converter();
-            converter.ConvertToFile(this.PDFpath,this.HTMLpath);
+            if (this.PDFpath != null)
+            {
 
-            /*Prepare strings to check*/
-            string[] stringsToRemove = new string[2];
-            stringsToRemove[0] = "<div style=\"position:absolute; top:50px;\"><a name=\"1\">Page";
-            stringsToRemove[1] = "<div style=\"position:absolute; top:0px;\">Page:";
+                try
+                {
+                    /*Convert pdf to html*/
+                    this.HTMLpath = ChangeString(this.PDFpath, ".pdf", ".html");
+                    PdfToHtmlNet.Converter converter = new PdfToHtmlNet.Converter();
+                    converter.ConvertToFile(this.PDFpath, this.HTMLpath);
 
-            this.pdfTextBox.LoadFile(new MemoryStream(Encoding.UTF8.GetBytes((MarkupConverter.HtmlToRtfConverter.ConvertHtmlToRtf(RemoveLineFromFile(this.HTMLpath, stringsToRemove))))), RichTextBoxStreamType.RichText);
+                    /*Prepare strings to check*/
+                    string[] stringsToRemove = new string[4];
+                    stringsToRemove[0] = "<div style=\"position:absolute; top:50px;\"><a name=\"1\">Page";
+                    stringsToRemove[1] = "<div style=\"position:absolute; top:0px;\">Page:";
+                    stringsToRemove[2] = "<br></span></div><div style=\"position:absolute; top:0px;\">Page:";
+                    stringsToRemove[3] = "<span style=\"font-family: Utopia-Regular; font-size:10px\">1";
 
-            /*Delete html temp file*/
-            //File.Delete(this.HTMLpath);
+                    this.pdfTextBox.LoadFile(new MemoryStream(Encoding.UTF8.GetBytes((MarkupConverter.HtmlToRtfConverter.ConvertHtmlToRtf(RemoveLineFromFile(this.HTMLpath, stringsToRemove))))), RichTextBoxStreamType.RichText);
+                }
+                catch
+                {
+                    MessageBox.Show("Il documento ", "Errore di lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                /*Delete html temp file*/
+                //File.Delete(this.HTMLpath);
+            }
 
             /*Hide loading images*/
             this.loading.Hide();
