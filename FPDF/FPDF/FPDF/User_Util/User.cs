@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FPDF.User_Util
 {
-    internal class User
+    public class User
     {   
         /*--Fields--*/
 

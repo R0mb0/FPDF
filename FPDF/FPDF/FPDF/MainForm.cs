@@ -35,7 +35,7 @@ namespace FPDF
 
             /*Load login form*/
             login.ShowDialog();
-            this.user = this.login.user
+            this.user = this.login.user;
 
             this.tUserName.Text = user.obtainName();
             this.tUserMail.Text = user.getMail();
