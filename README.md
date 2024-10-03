@@ -5,6 +5,10 @@
 - Email: `example@gmail.com`
 - Password: `R0mb0`
 
+## Notes
+
+- Inside the folder that contains the binaries is necessary add `New_Documents_Example` directory before run the application.
+
 ## ⚠️ Dependencies ⚠️
 
 ### NuGet
