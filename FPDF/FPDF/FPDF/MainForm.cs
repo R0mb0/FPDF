@@ -23,23 +23,31 @@ namespace FPDF
 
         /*form vasriables*/
         private LoginForm login = new LoginForm();
+        private NewForm newForm = new NewForm();
         private User user;
 
         /*--Builder--*/
         public FPDF()
         {
             InitializeComponent();
-
-            /*hide loading panel*/
+            
+            //hide loading panel
             this.loading.Hide();
+            
+            //Load login form
+            this.login.ShowDialog();
 
-            /*Load login form*/
-            login.ShowDialog();
-            this.user = this.login.user;
-
-            this.tUserName.Text = user.obtainName();
-            this.tUserMail.Text = user.getMail();
-
+            //Check if the login has been filled
+            if (this.login.user != null)
+            {
+                this.user = this.login.user;
+                this.tUserName.Text = user.obtainName();
+                this.tUserMail.Text = user.getMail();
+            }
+            else
+            {
+                this.Close();
+            }
         }
 
         /*--Private methods--*/
@@ -86,24 +94,15 @@ namespace FPDF
         /*New Button*/
         private void bNew_Click(object sender, EventArgs e)
         {
+            //Open new panel
+            this.newForm.ShowDialog();
+            this.PDFpath = newForm.filePath;
+
             //Show loading image
             this.loading.Show();
             //Reset text boc
             this.pdfTextBox.Clear();
 
-            // Create an OpenFileDialog to request a file to open.
-            OpenFileDialog openFile1 = new OpenFileDialog();
-
-            // Initialize OpenFileDialog to open pdf files.
-            openFile1.DefaultExt = "*.pdf";
-            openFile1.Filter = "PDF Files|*.pdf";
-
-            // Determine whether the user selected a file from the OpenFileDialog. 
-            if (openFile1.ShowDialog() == System.Windows.Forms.DialogResult.OK &&
-               openFile1.FileName.Length > 0)
-            {
-                this.PDFpath = openFile1.FileName;
-            }
 
             if (this.PDFpath != null)
             {
