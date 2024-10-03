@@ -1,0 +1,90 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%% Include Packages %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Page proterties
+\documentclass[hidelinks,12pt,a4paper]{article}
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{fourier} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Packages
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{lipsum}
+
+
+
+% For images
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\graphicspath{{Images}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Variables %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% New Commands Part %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Fields
+% Command to create fillable fields
+\newsavebox\TBox
+\newcommand{\Field}[1]{
+	\sbox\TBox{#1 }%
+	\TextField[backgroundcolor=gray!30,borderwidth=0,width=\dimexpr\linewidth-\wd\TBox]{#1 }
+}
+
+%%%%%% Document title
+\newcommand{\Title}{
+	\begin{center}
+		\textbf{\Large Example Document 1}
+	\end{center}
+}
+
+%%%%%% Text under the title
+\newcommand{\TextUnderTitle}{
+	\lipsum[1]
+}
+
+%%%%%% Title of the mail to send
+\newcommand{\MailTitle}{
+	Generic request
+}
+
+%%%%%% Mail address where send the request
+\newcommand{\Mail}{
+	example@gmail.com
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Modules %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Document %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+	\begin{Form}[action=mailto:\Mail?subject={\MailTitle},encoding=html, method=post]
+		
+		\Title
+		\vspace*{3mm}
+		\TextUnderTitle 
+		\vspace*{8mm}
+		\newline
+		%\vspace*{\hfill}
+		\Field{{\large The undersigned:}}
+		\newline
+		\vspace*{3mm}
+		\hspace*{-2mm}
+		\Field{{\large Asks for:}}
+		\newline
+		\vspace*{3mm}
+		Through the informatic office of this departement
+		\newline
+		%\hspace*{-1}
+		{\large Mail where to send the request:} \Mail
+		\newline
+	\end{Form}
+	\newline
+	\vspace*{\fill}
+	\PushButton[onclick={app.execMenuItem("Save")}]{\textbf{Send}}	
+		
+\end{document}
