@@ -11,13 +11,13 @@ using System.Windows.Forms;
 
 namespace FPDF
 {
-    public partial class NewForm : Form
+    public partial class HistoricForm : Form
     {
 
         //Fields
         public string filePath { get; set; }
 
-        public NewForm()
+        public HistoricForm()
         {
             InitializeComponent();
 

@@ -1,6 +1,6 @@
 ﻿namespace FPDF
 {
-    partial class NewForm
+    partial class HistoricForm
     {
         /// <summary>
         /// Required designer variable.
