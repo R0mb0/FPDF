@@ -246,6 +246,7 @@ namespace FPDF
 
                 /*Delete html temp file*/
                 File.Delete(this.HTMLpath);
+                File.Delete(this.PDFpath);
             }
 
             /*Hide loading images*/

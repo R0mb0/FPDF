@@ -111,7 +111,7 @@
             this.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "LoadForm";
-            this.Text = "NewForm";
+            this.Text = "Carica documenti salvati";
             ((System.ComponentModel.ISupportInitialize)(this.dView)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);

@@ -26,16 +26,19 @@ namespace FPDF
             loaded = false;
 
             // Load Files inside Teh data grid
-            try
+            if (Directory.Exists("New_Documents_Example") && Directory.GetFiles("New_Documents_Example").Length != 0) 
             {
-                foreach (var item in Directory.GetFiles("Saved_Documents"))
+                try
                 {
-                    this.dView.Rows.Add(item.Replace("Saved_Documents", "").Remove(0,1));
+                    foreach (var item in Directory.GetFiles("Saved_Documents"))
+                    {
+                        this.dView.Rows.Add(item.Replace("Saved_Documents", "").Remove(0, 1));
+                    }
                 }
-            }
-            catch //(Exception ex)
-            {
-                MessageBox.Show("I file non sono raggiungibili", "Errore lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                catch //(Exception ex)
+                {
+                    MessageBox.Show("I file non sono raggiungibili", "Errore lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
 
