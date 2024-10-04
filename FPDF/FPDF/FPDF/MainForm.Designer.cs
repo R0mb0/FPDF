@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FPDF));
             this.pdfTextBox = new System.Windows.Forms.RichTextBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tMails = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -51,27 +50,18 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
             this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // pdfTextBox
             // 
             this.pdfTextBox.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pdfTextBox.Location = new System.Drawing.Point(14, 42);
+            this.pdfTextBox.Location = new System.Drawing.Point(13, 12);
             this.pdfTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.pdfTextBox.Name = "pdfTextBox";
             this.pdfTextBox.Size = new System.Drawing.Size(576, 364);
             this.pdfTextBox.TabIndex = 0;
             this.pdfTextBox.Text = "";
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(723, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
             // 
             // panel1
             // 
@@ -82,7 +72,7 @@
             this.panel1.Controls.Add(this.tUserName);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(14, 422);
+            this.panel1.Location = new System.Drawing.Point(13, 399);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(576, 120);
@@ -173,7 +163,7 @@
             // bHistoric
             // 
             this.bHistoric.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bHistoric.Location = new System.Drawing.Point(624, 280);
+            this.bHistoric.Location = new System.Drawing.Point(10, 20);
             this.bHistoric.Name = "bHistoric";
             this.bHistoric.Size = new System.Drawing.Size(75, 23);
             this.bHistoric.TabIndex = 7;
@@ -226,9 +216,9 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.panel2.Location = new System.Drawing.Point(614, 42);
+            this.panel2.Location = new System.Drawing.Point(614, 27);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(97, 137);
+            this.panel2.Size = new System.Drawing.Size(97, 153);
             this.panel2.TabIndex = 12;
             // 
             // panel3
@@ -236,7 +226,7 @@
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.panel3.Controls.Add(this.bSend);
             this.panel3.Controls.Add(this.bDelete);
-            this.panel3.Location = new System.Drawing.Point(614, 422);
+            this.panel3.Location = new System.Drawing.Point(614, 399);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(97, 120);
             this.panel3.TabIndex = 13;
@@ -244,7 +234,8 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.panel4.Location = new System.Drawing.Point(614, 259);
+            this.panel4.Controls.Add(this.bHistoric);
+            this.panel4.Location = new System.Drawing.Point(614, 225);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(97, 67);
             this.panel4.TabIndex = 14;
@@ -254,20 +245,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(723, 554);
+            this.ClientSize = new System.Drawing.Size(723, 532);
             this.Controls.Add(this.bLoad);
             this.Controls.Add(this.loading);
-            this.Controls.Add(this.bHistoric);
             this.Controls.Add(this.bNew);
             this.Controls.Add(this.bSave);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pdfTextBox);
-            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel4);
             this.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "FPDF";
             this.Text = "FPDF";
@@ -275,15 +263,14 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();
             this.panel3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.RichTextBox pdfTextBox;
-        private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tUserMail;

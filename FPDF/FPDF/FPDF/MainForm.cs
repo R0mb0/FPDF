@@ -26,7 +26,7 @@ namespace FPDF
         private LoginForm login = new LoginForm();
         private NewForm newForm = new NewForm();
         private LoadForm loadForm = new LoadForm();
-        private HistoricForm HistoricForm = new HistoricForm();
+        private HistoricForm historicForm = new HistoricForm();
 
         /*Filter variable*/
         string[] stringsToRemove = new string[4];
@@ -218,8 +218,8 @@ namespace FPDF
         private void bHistoric_Click(object sender, EventArgs e)
         {
             //Open new panel
-            this.newForm.ShowDialog();
-            this.PDFpath = newForm.filePath;
+            this.historicForm.ShowDialog();
+            this.PDFpath = historicForm.filePath;
 
             //Show loading image
             this.loading.Show();
