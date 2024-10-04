@@ -46,9 +46,9 @@ namespace FPDF
             // Load Files inside Teh data grid
             try
             {
-                foreach (var item in Directory.GetFiles("New_Documents_Example"))
+                foreach (var item in Directory.GetFiles("Sent_Documents"))
                 {
-                    this.dView.Rows.Add(item.Replace("New_Documents_Example", "").Remove(0,1));
+                    this.dView.Rows.Add(item.Replace("Sent_Documents", "").Remove(0,1));
                 }
             }
             catch //(Exception ex)
@@ -61,7 +61,7 @@ namespace FPDF
         private void bSelect_Click(object sender, EventArgs e)
         {
             // Here load files and close panel
-            this.filePath = "New_Documents_Example\\" + this.dView.SelectedCells[0].Value.ToString();
+            this.filePath = "Sent_Documents\\" + this.dView.SelectedCells[0].Value.ToString();
             try 
             {
                 File.Copy(this.filePath, this.dView.SelectedCells[0].Value.ToString());

@@ -26,7 +26,7 @@ namespace FPDF
         private LoginForm login = new LoginForm();
         private NewForm newForm = new NewForm();
         private LoadForm loadForm = new LoadForm();
-        private User user;
+        private HistoricForm HistoricForm = new HistoricForm();
 
         /*Filter variable*/
         string[] stringsToRemove = new string[4];
@@ -93,6 +93,13 @@ namespace FPDF
             return string.Join("", File.ReadLines(path).Where(line => !stringStartsWith(line, stringstoRemove))); 
         }
 
+        /*Enable Disabled buttons*/
+        private void EnableButtons() 
+        { 
+            this.bSend.Enabled = true;
+            this.bSave.Enabled = true;
+        }
+
         /*New Button*/
         private void bNew_Click(object sender, EventArgs e)
         {
@@ -104,6 +111,9 @@ namespace FPDF
             this.loading.Show();
             //Reset text boc
             this.pdfTextBox.Clear();
+
+            //Enable buttons
+            EnableButtons();
 
 
             if (this.PDFpath != null)
@@ -171,6 +181,9 @@ namespace FPDF
             //Reset text boc
             this.pdfTextBox.Clear();
 
+            //Enable buttons
+            EnableButtons();
+
             if (this.loadForm.loaded)
             {
                 if (this.PDFpath != null)
@@ -204,7 +217,43 @@ namespace FPDF
         /*View storics files*/
         private void bHistoric_Click(object sender, EventArgs e)
         {
-           
+            //Open new panel
+            this.newForm.ShowDialog();
+            this.PDFpath = newForm.filePath;
+
+            //Show loading image
+            this.loading.Show();
+            //Reset text boc
+            this.pdfTextBox.Clear();
+
+
+            if (this.PDFpath != null)
+            {
+
+                try
+                {
+                    /*Convert pdf to html*/
+                    this.HTMLpath = ChangeString(this.PDFpath, ".pdf", ".html");
+                    PdfToHtmlNet.Converter converter = new PdfToHtmlNet.Converter();
+                    converter.ConvertToFile(this.PDFpath, this.HTMLpath);
+
+                    this.pdfTextBox.LoadFile(new MemoryStream(Encoding.UTF8.GetBytes((MarkupConverter.HtmlToRtfConverter.ConvertHtmlToRtf(RemoveLineFromFile(this.HTMLpath, stringsToRemove))))), RichTextBoxStreamType.RichText);
+                }
+                catch
+                {
+                    MessageBox.Show("Il documento non è caricabile", "Errore di lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                /*Delete html temp file*/
+                File.Delete(this.HTMLpath);
+            }
+
+            /*Hide loading images*/
+            this.loading.Hide();
+            //Disable buttons
+            this.bSend.Enabled = false;
+            this.bSave.Enabled = false;
+
         }
 
         /*Send the document*/
@@ -238,7 +287,8 @@ namespace FPDF
         /*Reset buttons*/
         private void bDelete_Click(object sender, EventArgs e)
         {
-            
+            //Enable buttons
+            EnableButtons();
             this.pdfTextBox.Clear();
         }
     }
