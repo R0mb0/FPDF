@@ -190,6 +190,7 @@
             this.bSend.TabIndex = 8;
             this.bSend.Text = "Invia";
             this.bSend.UseVisualStyleBackColor = true;
+            this.bSend.Click += new System.EventHandler(this.bSend_Click);
             // 
             // loading
             // 
@@ -220,6 +221,7 @@
             this.bLoad.TabIndex = 11;
             this.bLoad.Text = "Carica";
             this.bLoad.UseVisualStyleBackColor = true;
+            this.bLoad.Click += new System.EventHandler(this.bLoad_Click);
             // 
             // panel2
             // 

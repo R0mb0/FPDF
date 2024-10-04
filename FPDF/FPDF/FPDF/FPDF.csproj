@@ -284,6 +284,12 @@
     <Compile Include="HTML_Util\htmltoxamlconverter.cs" />
     <Compile Include="HTML_Util\MarkupConverter.cs" />
     <Compile Include="HTML_Util\RtfToHtmlConverter.cs" />
+    <Compile Include="LoadForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadForm.Designer.cs">
+      <DependentUpon>LoadForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -298,6 +304,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadForm.resx">
+      <DependentUpon>LoadForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewForm.resx">
       <DependentUpon>NewForm.cs</DependentUpon>

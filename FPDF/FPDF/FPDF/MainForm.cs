@@ -20,11 +20,16 @@ namespace FPDF
         /*Working varaibles*/
         private string PDFpath = null;
         private string HTMLpath = null;
+        private string savePath = null;
 
         /*form vasriables*/
         private LoginForm login = new LoginForm();
         private NewForm newForm = new NewForm();
+        private LoadForm loadForm = new LoadForm();
         private User user;
+
+        /*Filter variable*/
+        string[] stringsToRemove = new string[4];
 
         /*--Builder--*/
         public FPDF()
@@ -33,7 +38,15 @@ namespace FPDF
             
             //hide loading panel
             this.loading.Hide();
-            
+
+            //Prepare filter strin array
+            /*Prepare strings to check*/
+            stringsToRemove[0] = "<div style=\"position:absolute; top:50px;\"><a name=\"1\">Page";
+            stringsToRemove[1] = "<div style=\"position:absolute; top:0px;\">Page:";
+            stringsToRemove[2] = "<br></span></div><div style=\"position:absolute; top:0px;\">Page:";
+            stringsToRemove[3] = "<span style=\"font-family: Utopia-Regular; font-size:10px\">1";
+
+            /*
             //Load login form
             this.login.ShowDialog();
 
@@ -47,7 +60,7 @@ namespace FPDF
             else
             {
                 this.Close();
-            }
+            }*/
         }
 
         /*--Private methods--*/
@@ -58,17 +71,6 @@ namespace FPDF
             StringBuilder builder = new StringBuilder(original);
             builder.Replace(find, replace);
             return builder.ToString();
-        }
-
-        /*Enable all buttons*/
-        private void EnableAll() 
-        {
-            this.bNew.Enabled = true;
-            this.bSave.Enabled = true;
-            this.bLoad.Enabled = true;
-            this.bHistoric.Enabled = true;
-            this.bSend.Enabled = true;
-            //this.bDelete.Enabled = true;
         }
 
         /*Check is a string starts with the strings to check */
@@ -114,22 +116,15 @@ namespace FPDF
                     PdfToHtmlNet.Converter converter = new PdfToHtmlNet.Converter();
                     converter.ConvertToFile(this.PDFpath, this.HTMLpath);
 
-                    /*Prepare strings to check*/
-                    string[] stringsToRemove = new string[4];
-                    stringsToRemove[0] = "<div style=\"position:absolute; top:50px;\"><a name=\"1\">Page";
-                    stringsToRemove[1] = "<div style=\"position:absolute; top:0px;\">Page:";
-                    stringsToRemove[2] = "<br></span></div><div style=\"position:absolute; top:0px;\">Page:";
-                    stringsToRemove[3] = "<span style=\"font-family: Utopia-Regular; font-size:10px\">1";
-
                     this.pdfTextBox.LoadFile(new MemoryStream(Encoding.UTF8.GetBytes((MarkupConverter.HtmlToRtfConverter.ConvertHtmlToRtf(RemoveLineFromFile(this.HTMLpath, stringsToRemove))))), RichTextBoxStreamType.RichText);
                 }
                 catch
                 {
-                    MessageBox.Show("Il documento ", "Errore di lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Il documento non è caricabile", "Errore di lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 /*Delete html temp file*/
-                //File.Delete(this.HTMLpath);
+                File.Delete(this.HTMLpath);
             }
 
             /*Hide loading images*/
@@ -143,20 +138,107 @@ namespace FPDF
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             HtmlConverter.ConvertToPdf(Rtf.ToHtml(this.pdfTextBox.Rtf.ToString()), new FileStream(this.PDFpath, FileMode.Create));
 
-            /*Send a postivie message*/
-            MessageBox.Show("Il documento è stato inviato");
-            
+            //MessageBox.Show("Saved_Documents\\"+DateTime.Now.ToString().Replace("/","-").Replace(" ","_").Replace(":","-")+"_"+this.PDFpath);
+            if (!Directory.Exists("Saved_Documents")) 
+            {
+                Directory.CreateDirectory("Saved_Documents");
+            }
+            this.savePath = "Saved_Documents\\" + DateTime.Now.ToString().Replace("/", "-").Replace(" ", "_").Replace(":", "-") + "_" + this.PDFpath;
+            File.Copy(this.PDFpath, this.savePath);
+            File.Delete(this.PDFpath);
+
+            //Text the documet
+            if (File.Exists(this.savePath))
+            {
+                MessageBox.Show("Il documento è stato salvato");
+                this.pdfTextBox.Clear();
+            }
+            else 
+            {
+                MessageBox.Show("Il documento non è stato salvato");
+            }
+        }
+
+        /*Load olds files*/
+        private void bLoad_Click(object sender, EventArgs e)
+        {
+            //Open new panel
+            this.loadForm.ShowDialog();
+            this.PDFpath = loadForm.filePath;
+
+            //Show loading image
+            this.loading.Show();
+            //Reset text boc
+            this.pdfTextBox.Clear();
+
+            if (this.loadForm.loaded)
+            {
+                if (this.PDFpath != null)
+                {
+
+                    try
+                    {
+                        /*Convert pdf to html*/
+                        this.HTMLpath = ChangeString(this.PDFpath, ".pdf", ".html");
+                        PdfToHtmlNet.Converter converter = new PdfToHtmlNet.Converter();
+                        converter.ConvertToFile(this.PDFpath, this.HTMLpath);
+
+                        this.pdfTextBox.LoadFile(new MemoryStream(Encoding.UTF8.GetBytes((MarkupConverter.HtmlToRtfConverter.ConvertHtmlToRtf(RemoveLineFromFile(this.HTMLpath, stringsToRemove))))), RichTextBoxStreamType.RichText);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Il documento non è caricabile", "Errore di lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    /*Delete html temp file*/
+                    File.Delete(this.HTMLpath);
+                }
+            }
+            else 
+            {
+                MessageBox.Show("Il documento non è presente", "Errore di lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            this.loading.Hide();
         }
 
         /*View storics files*/
         private void bHistoric_Click(object sender, EventArgs e)
         {
-            
+           
+        }
+
+        /*Send the document*/
+        private void bSend_Click(object sender, EventArgs e)
+        {
+            //This works great only if the path is in pdf format
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            HtmlConverter.ConvertToPdf(Rtf.ToHtml(this.pdfTextBox.Rtf.ToString()), new FileStream(this.PDFpath, FileMode.Create));
+
+            //MessageBox.Show("Saved_Documents\\"+DateTime.Now.ToString().Replace("/","-").Replace(" ","_").Replace(":","-")+"_"+this.PDFpath);
+            if (!Directory.Exists("Sent_Documents"))
+            {
+                Directory.CreateDirectory("Sent_Documents");
+            }
+            this.savePath = "Sent_Documents\\" + DateTime.Now.ToString().Replace("/", "-").Replace(" ", "_").Replace(":", "-") + "_" + this.PDFpath;
+            File.Copy(this.PDFpath, this.savePath);
+            File.Delete(this.PDFpath);
+
+            //Text the documet
+            if (File.Exists(this.savePath))
+            {
+                MessageBox.Show("Il documento è stato salvato");
+                this.pdfTextBox.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Il documento non è stato salvato");
+            }
         }
 
         /*Reset buttons*/
         private void bDelete_Click(object sender, EventArgs e)
         {
+            
             this.pdfTextBox.Clear();
         }
     }
