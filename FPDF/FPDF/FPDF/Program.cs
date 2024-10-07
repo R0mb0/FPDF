@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sun.tools.tree;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,14 @@ namespace FPDF
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FPDF());
+            try
+            {
+                Application.Run(new FPDF());
+            }
+            catch 
+            {
+                Application.Exit();
+            }
         }
     }
 }

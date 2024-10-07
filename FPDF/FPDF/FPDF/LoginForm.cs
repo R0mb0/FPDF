@@ -46,7 +46,7 @@ namespace FPDF
                 //string queryString = "";
 
                 
-                /*using (SqlConnection connection = new SqlConnection(Daabase.Database.GetUserDatabaseConnectionString()))
+                /*using (SqlConnection connection = new SqlConnection(Database.Database.GetUserDatabaseConnectionString()))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();

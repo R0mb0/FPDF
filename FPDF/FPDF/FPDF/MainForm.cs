@@ -25,6 +25,7 @@ namespace FPDF
         private string PDFpath = null;
         private string HTMLpath = null;
         private string savePath = null;
+        private User user;
 
         /*form vasriables*/
         private LoginForm login = new LoginForm();
@@ -34,6 +35,10 @@ namespace FPDF
 
         /*Filter array*/
         string[] stringsToRemove = new string[4];//<-- careful at this value
+
+        /*Variable to prepare the mail*/
+        private string mailCc = null;
+        private string mailSubject = "Richiesta inviata dal sistema informatico";
 
         /*--Builder--*/
         public FPDF()
@@ -50,7 +55,6 @@ namespace FPDF
             stringsToRemove[2] = "<br></span></div><div style=\"position:absolute; top:0px;\">Page:";
             stringsToRemove[3] = "<span style=\"font-family: Utopia-Regular; font-size:10px\">1";
 
-            /*
             //Load login form
             this.login.ShowDialog();
 
@@ -64,7 +68,7 @@ namespace FPDF
             else
             {
                 this.Close();
-            }*/
+            }
         }
 
         /*--Private methods--*/
@@ -124,6 +128,10 @@ namespace FPDF
         }
 
         /*Prepare mail for outlook*/
+        private void SendMail(string mailTo, string subject, string body)
+        {
+            Process.Start("mailto:" + mailTo + "&subject=" + subject + "&body=" + body);
+        }
         private void SendMail(string mailTo,string cc,string subject, string body)
         {
             Process.Start("mailto:"+ mailTo + "?cc="+cc+"&subject="+subject+"&body="+body);
@@ -307,9 +315,39 @@ namespace FPDF
             this.savePath = "Sent_Documents\\" + DateTime.Now.ToString().Replace("/", "-").Replace(" ", "_").Replace(":", "-") + "_" + this.PDFpath;
             File.Copy(this.PDFpath, this.savePath);
 
-            // Send the mail
+            // Open the mail clinet
+            if (this.mailCc == null)
+            {
+                SendMail(this.tMails.Text, this.mailCc, this.mailSubject, this.pdfTextBox.Text);
+            }
+            else 
+            {
+                SendMail(this.tMails.Text, this.mailSubject, this.pdfTextBox.Text);
+            }
 
+            //Write document in the database
+            /*
+           //string queryString = "";
 
+               /*using (SqlConnection connection = new SqlConnection(Database.Database.GetDatesDatabaseConnectionString()))
+               {
+                   SqlCommand command = new SqlCommand(queryString, connection);
+                   connection.Open();
+                   SqlDataReader reader = command.ExecuteReader();
+                   try
+                   {
+                       while (reader.Read())
+                       {
+
+                       }
+                   }
+                   finally
+                   {
+                       reader.Close();
+                   }
+               }*/
+
+            //In the end remove current pdf file
             File.Delete(this.PDFpath);
 
             //Text the documet
@@ -329,8 +367,7 @@ namespace FPDF
         private void bDelete_Click(object sender, EventArgs e)
         {
             //Enable buttons
-            //EnableButtons();
-            SendMail("example@gmail.com", "examle_ciao@gmail.com", "Invio della mail", "Corpo");
+            EnableButtons();
         }
     }
 }
