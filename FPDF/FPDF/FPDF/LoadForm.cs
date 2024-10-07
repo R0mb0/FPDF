@@ -71,6 +71,7 @@ namespace FPDF
             this.Close();
         }
 
+        /*Delete files*/
         private void bDel_Click(object sender, EventArgs e)
         {
             //Delete old files

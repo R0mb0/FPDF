@@ -149,58 +149,85 @@ namespace FPDF
             Process.Start("mailto:"+ mailTo + "?cc="+cc+"&subject="+subject+"&body="+body);
         }
 
+        /*In case of closing form*/
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+
+            // Check text before close panel
+            if (this.workInProgress) 
+            {
+
+                switch (MessageBox.Show(this, "Ci potrebbero essere delle modifiche in sospeso, Proseguire?", "Avviso", MessageBoxButtons.YesNo))
+                {
+                    case DialogResult.Yes:
+                        break;
+                    default:
+                        e.Cancel = true;
+                        break;
+                }
+            }
+            
+        }
+
         /*-------------------------------------Buttons Part-------------------------------------*/
         /*New Button*/
         private void bNew_Click(object sender, EventArgs e)
         {
-            if (this.workInProgress) 
+            if (this.workInProgress)
             {
-                if (MessageBox.Show("Ci potrebbero essere delle modifiche in sospeso, Proseguire?", "Avviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) 
+                if (MessageBox.Show("Ci potrebbero essere delle modifiche in sospeso, Proseguire?", "Avviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 {
-                    //Open new panel
-                    this.newForm.ShowDialog();
-                    this.PDFpath = newForm.filePath;
-
-                    //Set work in progress variable
-                    this.workInProgress = true;
-
-                    //Show loading image
-                    this.loading.Show();
-                    //Reset boxes
-                    EraseAll();
-
-                    //Enable buttons
-                    EnableButtons();
-
-
-                    if (this.PDFpath != null)
-                    {
-
-                        try
-                        {
-                            /*Convert pdf to html*/
-                            this.HTMLpath = ChangeString(this.PDFpath, ".pdf", ".html");
-                            PdfToHtmlNet.Converter converter = new PdfToHtmlNet.Converter();
-                            converter.ConvertToFile(this.PDFpath, this.HTMLpath);
-
-                            this.pdfTextBox.LoadFile(new MemoryStream(Encoding.UTF8.GetBytes((MarkupConverter.HtmlToRtfConverter.ConvertHtmlToRtf(RemoveLineFromFile(this.HTMLpath, stringsToRemove))))), RichTextBoxStreamType.RichText);
-                        }
-                        catch
-                        {
-                            MessageBox.Show("Il documento non è caricabile", "Errore di lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-
-                        //Extract mail from text
-                        this.tMails.Text = GetEmail(this.pdfTextBox.Text);
-
-                        /*Delete html temp file*/
-                        File.Delete(this.HTMLpath);
-                    }
-
-                    /*Hide loading images*/
-                    this.loading.Hide();
+                    return;
                 }
+                
             }
+
+            //Open new panel
+            this.newForm.ShowDialog();
+            this.PDFpath = newForm.filePath;
+
+            //Set work in progress variable
+            this.workInProgress = true;
+
+            //Show loading image
+            this.loading.Show();
+            //Reset boxes
+            EraseAll();
+
+            //Enable buttons
+            EnableButtons();
+
+
+            if (this.PDFpath != null)
+            {
+
+                try
+                {
+                    /*Convert pdf to html*/
+                    this.HTMLpath = ChangeString(this.PDFpath, ".pdf", ".html");
+                    PdfToHtmlNet.Converter converter = new PdfToHtmlNet.Converter();
+                    converter.ConvertToFile(this.PDFpath, this.HTMLpath);
+
+                    this.pdfTextBox.LoadFile(new MemoryStream(Encoding.UTF8.GetBytes((MarkupConverter.HtmlToRtfConverter.ConvertHtmlToRtf(RemoveLineFromFile(this.HTMLpath, stringsToRemove))))), RichTextBoxStreamType.RichText);
+                }
+                catch
+                {
+                    MessageBox.Show("Il documento non è caricabile", "Errore di lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                //Extract mail from text
+                this.tMails.Text = GetEmail(this.pdfTextBox.Text);
+
+                /*Delete html temp file*/
+                File.Delete(this.HTMLpath);
+            }
+
+            /*Hide loading images*/
+            this.loading.Hide();
+
         }
 
 
@@ -246,53 +273,55 @@ namespace FPDF
 
             if (this.workInProgress) 
             {
-                if (MessageBox.Show("Ci potrebbero essere delle modifiche in sospeso, Proseguire?", "Avviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) 
+                if (MessageBox.Show("Ci potrebbero essere delle modifiche in sospeso, Proseguire?", "Avviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) 
                 {
-                    //Open new panel
-                    this.loadForm.ShowDialog();
-                    this.PDFpath = loadForm.filePath;
-
-                    //Set work in progress variable
-                    this.workInProgress = true;
-
-                    //Show loading image
-                    this.loading.Show();
-                    //Reset boxes
-                    EraseAll();
-
-                    //Enable buttons
-                    EnableButtons();
-
-                    if (this.loadForm.loaded)
-                    {
-                        if (this.PDFpath != null)
-                        {
-
-                            try
-                            {
-                                /*Convert pdf to html*/
-                                this.HTMLpath = ChangeString(this.PDFpath, ".pdf", ".html");
-                                PdfToHtmlNet.Converter converter = new PdfToHtmlNet.Converter();
-                                converter.ConvertToFile(this.PDFpath, this.HTMLpath);
-
-                                this.pdfTextBox.LoadFile(new MemoryStream(Encoding.UTF8.GetBytes((MarkupConverter.HtmlToRtfConverter.ConvertHtmlToRtf(RemoveLineFromFile(this.HTMLpath, stringsToRemove))))), RichTextBoxStreamType.RichText);
-                            }
-                            catch
-                            {
-                                MessageBox.Show("Il documento non è caricabile", "Errore di lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            }
-
-                            /*Delete html temp file*/
-                            File.Delete(this.HTMLpath);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Il documento non è presente", "Errore di lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                    this.loading.Hide();
+                    return; 
                 }
             }
+
+            //Open new panel
+            this.loadForm.ShowDialog();
+            this.PDFpath = loadForm.filePath;
+
+            //Set work in progress variable
+            this.workInProgress = true;
+
+            //Show loading image
+            this.loading.Show();
+            //Reset boxes
+            EraseAll();
+
+            //Enable buttons
+            EnableButtons();
+
+            if (this.loadForm.loaded)
+            {
+                if (this.PDFpath != null)
+                {
+
+                    try
+                    {
+                        /*Convert pdf to html*/
+                        this.HTMLpath = ChangeString(this.PDFpath, ".pdf", ".html");
+                        PdfToHtmlNet.Converter converter = new PdfToHtmlNet.Converter();
+                        converter.ConvertToFile(this.PDFpath, this.HTMLpath);
+
+                        this.pdfTextBox.LoadFile(new MemoryStream(Encoding.UTF8.GetBytes((MarkupConverter.HtmlToRtfConverter.ConvertHtmlToRtf(RemoveLineFromFile(this.HTMLpath, stringsToRemove))))), RichTextBoxStreamType.RichText);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Il documento non è caricabile", "Errore di lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    /*Delete html temp file*/
+                    File.Delete(this.HTMLpath);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Il documento non è presente", "Errore di lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            this.loading.Hide();
         }
 
         /*View storics files*/
@@ -301,53 +330,55 @@ namespace FPDF
 
             if (this.workInProgress) 
             {
-                if (MessageBox.Show("Ci potrebbero essere delle modifiche in sospeso, Proseguire?", "Avviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) 
+                if (MessageBox.Show("Ci potrebbero essere delle modifiche in sospeso, Proseguire?", "Avviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) 
                 {
-                    //Open new panel
-                    this.historicForm.ShowDialog();
-                    this.PDFpath = historicForm.filePath;
-
-                    //Set work in progress variable
-                    this.workInProgress = false;
-
-                    //Show loading image
-                    this.loading.Show();
-                    //Reset boxes
-                    EraseAll();
-
-
-                    if (this.PDFpath != null)
-                    {
-
-                        try
-                        {
-                            /*Convert pdf to html*/
-                            this.HTMLpath = ChangeString(this.PDFpath, ".pdf", ".html");
-                            PdfToHtmlNet.Converter converter = new PdfToHtmlNet.Converter();
-                            converter.ConvertToFile(this.PDFpath, this.HTMLpath);
-
-                            this.pdfTextBox.LoadFile(new MemoryStream(Encoding.UTF8.GetBytes((MarkupConverter.HtmlToRtfConverter.ConvertHtmlToRtf(RemoveLineFromFile(this.HTMLpath, stringsToRemove))))), RichTextBoxStreamType.RichText);
-                        }
-                        catch
-                        {
-                            MessageBox.Show("Il documento non è caricabile", "Errore di lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-
-                        /*Delete html temp file*/
-                        File.Delete(this.HTMLpath);
-                        File.Delete(this.PDFpath);
-                    }
-
-                    /*Hide loading images*/
-                    this.loading.Hide();
-
-                    //Manage buttons
-                    EnableButtons();
-                    //Disable buttons
-                    this.bSend.Enabled = false;
-                    this.bSave.Enabled = false;
+                    return;
                 }
             }
+
+            //Open new panel
+            this.historicForm.ShowDialog();
+            this.PDFpath = historicForm.filePath;
+
+            //Set work in progress variable
+            this.workInProgress = false;
+
+            //Show loading image
+            this.loading.Show();
+            //Reset boxes
+            EraseAll();
+
+
+            if (this.PDFpath != null)
+            {
+
+                try
+                {
+                    /*Convert pdf to html*/
+                    this.HTMLpath = ChangeString(this.PDFpath, ".pdf", ".html");
+                    PdfToHtmlNet.Converter converter = new PdfToHtmlNet.Converter();
+                    converter.ConvertToFile(this.PDFpath, this.HTMLpath);
+
+                    this.pdfTextBox.LoadFile(new MemoryStream(Encoding.UTF8.GetBytes((MarkupConverter.HtmlToRtfConverter.ConvertHtmlToRtf(RemoveLineFromFile(this.HTMLpath, stringsToRemove))))), RichTextBoxStreamType.RichText);
+                }
+                catch
+                {
+                    MessageBox.Show("Il documento non è caricabile", "Errore di lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                /*Delete html temp file*/
+                File.Delete(this.HTMLpath);
+                File.Delete(this.PDFpath);
+            }
+
+            /*Hide loading images*/
+            this.loading.Hide();
+
+            //Manage buttons
+            EnableButtons();
+            //Disable buttons
+            this.bSend.Enabled = false;
+            this.bSave.Enabled = false;
         }
 
         /*Send the document*/
@@ -427,18 +458,20 @@ namespace FPDF
 
             if (this.workInProgress) 
             {
-                if (MessageBox.Show("Ci potrebbero essere delle modifiche in sospeso, Proseguire?", "Avviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question).ToString() == "yes") 
+                if (MessageBox.Show("Ci potrebbero essere delle modifiche in sospeso, Proseguire?", "Avviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) 
                 {
-                    //Set work in progress variable
-                    this.workInProgress = false;
-                    //Erase text fields
-                    EraseAll();
-                    //Enable buttons
-                    EnableButtons();
-                    this.bSave.Enabled = false;
-                    this.bSend.Enabled = false;
+                    return;
                 }
             }
+
+            //Set work in progress variable
+            this.workInProgress = false;
+            //Erase text fields
+            EraseAll();
+            //Enable buttons
+            EnableButtons();
+            this.bSave.Enabled = false;
+            this.bSend.Enabled = false;
         }
     }
 }
