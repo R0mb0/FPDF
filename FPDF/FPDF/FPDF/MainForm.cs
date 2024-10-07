@@ -48,6 +48,11 @@ namespace FPDF
             //hide loading panel
             this.loading.Hide();
 
+            // Disable buttons at start
+            this.bSave.Enabled = false;
+            this.bSend.Enabled = false;
+            this.bDelete.Enabled = false;
+
             //Prepare filter strin array
             /*Prepare strings to check*/
             stringsToRemove[0] = "<div style=\"position:absolute; top:50px;\"><a name=\"1\">Page";
@@ -106,8 +111,11 @@ namespace FPDF
         { 
             this.bSend.Enabled = true;
             this.bSave.Enabled = true;
+            this.bDelete.Enabled = true;
+            this.bDelete.Enabled = true; 
         }
 
+        /*Erase all textfields*/
         private void EraseAll() 
         {
             this.pdfTextBox.Clear();
@@ -210,6 +218,11 @@ namespace FPDF
             {
                 MessageBox.Show("Il documento non è stato salvato");
             }
+
+            //Manage buttons
+            EnableButtons();
+            //Disable send buttons
+            this.bSend.Enabled = false;
         }
 
         /*Load olds files*/
@@ -294,6 +307,9 @@ namespace FPDF
 
             /*Hide loading images*/
             this.loading.Hide();
+
+            //Manage buttons
+            EnableButtons(); 
             //Disable buttons
             this.bSend.Enabled = false;
             this.bSave.Enabled = false;
@@ -361,13 +377,22 @@ namespace FPDF
             {
                 MessageBox.Show("Il documento non è stato salvato");
             }
+
+            //Manage buttons 
+            EnableButtons(); 
+            //Disable buttons
+            this.bSave.Enabled = false;
         }
 
         /*Reset buttons*/
         private void bDelete_Click(object sender, EventArgs e)
         {
+            //Erase text fields
+            EraseAll();
             //Enable buttons
             EnableButtons();
+            this.bSave.Enabled = false;
+            this.bSend.Enabled = false;
         }
     }
 }
