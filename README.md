@@ -1,5 +1,9 @@
 # FPDF, an application for organizations to open, fill and send PDFs 
 
+<p align="center">
+    <img src="https://github.com/R0mb0/FPDF/blob/main/Logo/Logo.png" width="30%" height="30%">
+</p>
+
 ## Credentials to pass login form
 
 - Email: `example@gmail.com`
