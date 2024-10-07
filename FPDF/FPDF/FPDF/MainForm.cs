@@ -142,7 +142,7 @@ namespace FPDF
         /*Prepare mail for outlook*/
         private void SendMail(string mailTo, string subject, string body)
         {
-            Process.Start("mailto:" + mailTo + "&subject=" + subject + "&body=" + body);
+            Process.Start("mailto:" + mailTo + "&cc= &subject=" + subject + "&body=" + body);
         }
         private void SendMail(string mailTo,string cc,string subject, string body)
         {
@@ -185,24 +185,23 @@ namespace FPDF
                 
             }
 
+            //Prepare before open form
+            this.PDFpath = null;
+
             //Open new panel
             this.newForm.ShowDialog();
             this.PDFpath = newForm.filePath;
-
-            //Set work in progress variable
-            this.workInProgress = true;
 
             //Show loading image
             this.loading.Show();
             //Reset boxes
             EraseAll();
 
-            //Enable buttons
-            EnableButtons();
-
 
             if (this.PDFpath != null)
             {
+                //Set work in progress variable
+                this.workInProgress = true;
 
                 try
                 {
@@ -223,6 +222,9 @@ namespace FPDF
 
                 /*Delete html temp file*/
                 File.Delete(this.HTMLpath);
+
+                //Enable buttons
+                EnableButtons();
             }
 
             /*Hide loading images*/
@@ -279,47 +281,46 @@ namespace FPDF
                 }
             }
 
+            //Prepare before open form
+            this.PDFpath = null;
+
             //Open new panel
+            this.loadForm.UpdateGrid();
             this.loadForm.ShowDialog();
             this.PDFpath = loadForm.filePath;
-
-            //Set work in progress variable
-            this.workInProgress = true;
 
             //Show loading image
             this.loading.Show();
             //Reset boxes
             EraseAll();
 
-            //Enable buttons
-            EnableButtons();
-
-            if (this.loadForm.loaded)
+            if (this.loadForm.loaded && this.PDFpath != null)
             {
-                if (this.PDFpath != null)
-                {
+                //Set work in progress variable
+                this.workInProgress = true;
 
-                    try
-                    {
-                        /*Convert pdf to html*/
-                        this.HTMLpath = ChangeString(this.PDFpath, ".pdf", ".html");
-                        PdfToHtmlNet.Converter converter = new PdfToHtmlNet.Converter();
-                        converter.ConvertToFile(this.PDFpath, this.HTMLpath);
+                try
+                 {
+                     /*Convert pdf to html*/
+                     this.HTMLpath = ChangeString(this.PDFpath, ".pdf", ".html");
+                     PdfToHtmlNet.Converter converter = new PdfToHtmlNet.Converter();
+                     converter.ConvertToFile(this.PDFpath, this.HTMLpath);
 
-                        this.pdfTextBox.LoadFile(new MemoryStream(Encoding.UTF8.GetBytes((MarkupConverter.HtmlToRtfConverter.ConvertHtmlToRtf(RemoveLineFromFile(this.HTMLpath, stringsToRemove))))), RichTextBoxStreamType.RichText);
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Il documento non è caricabile", "Errore di lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
+                     this.pdfTextBox.LoadFile(new MemoryStream(Encoding.UTF8.GetBytes((MarkupConverter.HtmlToRtfConverter.ConvertHtmlToRtf(RemoveLineFromFile(this.HTMLpath, stringsToRemove))))), RichTextBoxStreamType.RichText);
+                 }
+                 catch
+                 {
+                    MessageBox.Show("Il documento non è caricabile", "Errore di lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                 }
 
-                    /*Delete html temp file*/
-                    File.Delete(this.HTMLpath);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Il documento non è presente", "Errore di lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //Extract mail from text
+                this.tMails.Text = GetEmail(this.pdfTextBox.Text);
+
+                /*Delete html temp file*/
+                File.Delete(this.HTMLpath);
+
+                    //Enable buttons
+                    EnableButtons();
             }
             this.loading.Hide();
         }
@@ -336,12 +337,13 @@ namespace FPDF
                 }
             }
 
+            //Prepare before open form
+            this.PDFpath = null;
+
             //Open new panel
+            this.historicForm.UpdateGrid();
             this.historicForm.ShowDialog();
             this.PDFpath = historicForm.filePath;
-
-            //Set work in progress variable
-            this.workInProgress = false;
 
             //Show loading image
             this.loading.Show();
@@ -351,7 +353,8 @@ namespace FPDF
 
             if (this.PDFpath != null)
             {
-
+                //Set work in progress variable
+                this.workInProgress = false;
                 try
                 {
                     /*Convert pdf to html*/
@@ -365,20 +368,22 @@ namespace FPDF
                 {
                     MessageBox.Show("Il documento non è caricabile", "Errore di lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+                //Extract mail from text
+                this.tMails.Text = GetEmail(this.pdfTextBox.Text);
 
                 /*Delete html temp file*/
                 File.Delete(this.HTMLpath);
                 File.Delete(this.PDFpath);
+
+                //Manage buttons
+                EnableButtons();
+                //Disable buttons
+                this.bSend.Enabled = false;
+                this.bSave.Enabled = false;
             }
 
             /*Hide loading images*/
             this.loading.Hide();
-
-            //Manage buttons
-            EnableButtons();
-            //Disable buttons
-            this.bSend.Enabled = false;
-            this.bSave.Enabled = false;
         }
 
         /*Send the document*/

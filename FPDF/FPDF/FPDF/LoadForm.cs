@@ -24,22 +24,6 @@ namespace FPDF
 
             // In the case of closing panel
             loaded = false;
-
-            // Load Files inside Teh data grid
-            if (Directory.Exists("New_Documents_Example") && Directory.GetFiles("New_Documents_Example").Length != 0) 
-            {
-                try
-                {
-                    foreach (var item in Directory.GetFiles("Saved_Documents"))
-                    {
-                        this.dView.Rows.Add(item.Replace("Saved_Documents", "").Remove(0, 1));
-                    }
-                }
-                catch //(Exception ex)
-                {
-                    MessageBox.Show("I file non sono raggiungibili", "Errore lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
         }
 
         /*Load Saved files*/
@@ -84,6 +68,25 @@ namespace FPDF
 
                 //Reload
                 this.dView.Rows.Clear();
+                try
+                {
+                    foreach (var item in Directory.GetFiles("Saved_Documents"))
+                    {
+                        this.dView.Rows.Add(item.Replace("Saved_Documents", "").Remove(0, 1));
+                    }
+                }
+                catch //(Exception ex)
+                {
+                    MessageBox.Show("I file non sono raggiungibili", "Errore lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
+        public void UpdateGrid() 
+        {
+            // Load Files inside Teh data grid
+            if (Directory.Exists("New_Documents_Example") && Directory.GetFiles("New_Documents_Example").Length != 0)
+            {
                 try
                 {
                     foreach (var item in Directory.GetFiles("Saved_Documents"))

@@ -42,23 +42,6 @@ namespace FPDF
                         reader.Close();
                     }
                 }*/
-
-            // Load Files inside Teh data grid
-           if (Directory.Exists("Sent_Documents") && Directory.GetFiles("Sent_Documents").Length != 0) 
-            {
-                try
-                {
-                    foreach (var item in Directory.GetFiles("Sent_Documents"))
-                    {
-                        this.dView.Rows.Add(item.Replace("Sent_Documents", "").Remove(0, 1));
-                    }
-                }
-                catch //(Exception ex)
-                {
-                    MessageBox.Show("I file non sono raggiungibili", "Errore lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            
         }
 
         private void bSelect_Click(object sender, EventArgs e)
@@ -85,6 +68,25 @@ namespace FPDF
             this.filePath = this.dView.SelectedCells[0].Value.ToString();
             this.Close();
 
+        }
+
+        public void UpdateGrid() 
+        {
+            // Load Files inside Teh data grid
+            if (Directory.Exists("Sent_Documents") && Directory.GetFiles("Sent_Documents").Length != 0)
+            {
+                try
+                {
+                    foreach (var item in Directory.GetFiles("Sent_Documents"))
+                    {
+                        this.dView.Rows.Add(item.Replace("Sent_Documents", "").Remove(0, 1));
+                    }
+                }
+                catch //(Exception ex)
+                {
+                    MessageBox.Show("I file non sono raggiungibili", "Errore lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
         }
     }
 }
