@@ -10,6 +10,10 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using FPDF.User_Util;
+using System.Text.RegularExpressions;
+using System.Diagnostics;
+/**/
+
 
 namespace FPDF
 {
@@ -28,8 +32,8 @@ namespace FPDF
         private LoadForm loadForm = new LoadForm();
         private HistoricForm historicForm = new HistoricForm();
 
-        /*Filter variable*/
-        string[] stringsToRemove = new string[4];
+        /*Filter array*/
+        string[] stringsToRemove = new string[4];//<-- careful at this value
 
         /*--Builder--*/
         public FPDF()
@@ -100,6 +104,32 @@ namespace FPDF
             this.bSave.Enabled = true;
         }
 
+        private void EraseAll() 
+        {
+            this.pdfTextBox.Clear();
+            this.tMails.Clear();
+        }
+
+        /*Get mail or mails from the text*/
+        private string GetEmail(string text) 
+        {
+            Regex emailRegex = new Regex(@"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*",RegexOptions.IgnoreCase);
+            MatchCollection emailMatches = emailRegex.Matches(text);
+            StringBuilder sb = new StringBuilder();
+            foreach (Match emailMatch in emailMatches)
+            {
+                sb.AppendLine(emailMatch.Value);
+            }
+            return sb.ToString();
+        }
+
+        /*Prepare mail for outlook*/
+        private void SendMail(string mailTo,string cc,string subject, string body)
+        {
+            Process.Start("mailto:"+ mailTo + "?cc="+cc+"&subject="+subject+"&body="+body);
+        }
+
+        /*-------------------------------------Buttons Part-------------------------------------*/
         /*New Button*/
         private void bNew_Click(object sender, EventArgs e)
         {
@@ -109,8 +139,8 @@ namespace FPDF
 
             //Show loading image
             this.loading.Show();
-            //Reset text boc
-            this.pdfTextBox.Clear();
+            //Reset boxes
+            EraseAll();
 
             //Enable buttons
             EnableButtons();
@@ -133,6 +163,9 @@ namespace FPDF
                     MessageBox.Show("Il documento non è caricabile", "Errore di lettura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
+                //Extract mail from text
+                this.tMails.Text = GetEmail(this.pdfTextBox.Text);
+
                 /*Delete html temp file*/
                 File.Delete(this.HTMLpath);
             }
@@ -140,6 +173,7 @@ namespace FPDF
             /*Hide loading images*/
             this.loading.Hide();
         }
+
 
         /*Save Button*/
         private void bSave_Click(object sender, EventArgs e)
@@ -161,7 +195,8 @@ namespace FPDF
             if (File.Exists(this.savePath))
             {
                 MessageBox.Show("Il documento è stato salvato");
-                this.pdfTextBox.Clear();
+                //Reset boxes
+                EraseAll();
             }
             else 
             {
@@ -178,8 +213,8 @@ namespace FPDF
 
             //Show loading image
             this.loading.Show();
-            //Reset text boc
-            this.pdfTextBox.Clear();
+            //Reset boxes
+            EraseAll();
 
             //Enable buttons
             EnableButtons();
@@ -223,8 +258,8 @@ namespace FPDF
 
             //Show loading image
             this.loading.Show();
-            //Reset text boc
-            this.pdfTextBox.Clear();
+            //Reset boxes
+            EraseAll();
 
 
             if (this.PDFpath != null)
@@ -271,13 +306,18 @@ namespace FPDF
             }
             this.savePath = "Sent_Documents\\" + DateTime.Now.ToString().Replace("/", "-").Replace(" ", "_").Replace(":", "-") + "_" + this.PDFpath;
             File.Copy(this.PDFpath, this.savePath);
+
+            // Send the mail
+
+
             File.Delete(this.PDFpath);
 
             //Text the documet
             if (File.Exists(this.savePath))
             {
                 MessageBox.Show("Il documento è stato salvato");
-                this.pdfTextBox.Clear();
+                //Reset boxes
+                EraseAll();
             }
             else
             {
@@ -289,8 +329,8 @@ namespace FPDF
         private void bDelete_Click(object sender, EventArgs e)
         {
             //Enable buttons
-            EnableButtons();
-            this.pdfTextBox.Clear();
+            //EnableButtons();
+            SendMail("example@gmail.com", "examle_ciao@gmail.com", "Invio della mail", "Corpo");
         }
     }
 }
