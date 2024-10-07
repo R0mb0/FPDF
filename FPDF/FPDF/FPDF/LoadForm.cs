@@ -76,7 +76,7 @@ namespace FPDF
             //Delete old files
             loaded = false;
 
-            if (MessageBox.Show("La cancellazione del file è permanente, Proseguire?", "Avviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question).ToString() == "yes") 
+            if (MessageBox.Show("La cancellazione del file è permanente, Proseguire?", "Avviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) 
             {
                 //Delete selected files
                 File.Delete("Saved_Documents\\" + this.dView.SelectedCells[0].Value.ToString());
