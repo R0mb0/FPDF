@@ -142,11 +142,11 @@ namespace FPDF
         /*Prepare mail for outlook*/
         private void SendMail(string mailTo, string subject, string body)
         {
-            Process.Start("mailto:" + mailTo + "&cc= &subject=" + subject + "&body=" + body);
+            Process.Start("mailto:" + mailTo + "?subject=" + subject + "&body=" + body);
         }
         private void SendMail(string mailTo,string cc,string subject, string body)
         {
-            Process.Start("mailto:"+ mailTo + "?cc="+cc+"&subject="+subject+"&body="+body);
+            Process.Start("mailto:"+ mailTo + "?cc="+cc+"&subject="+subject+"&body=" + body);
         }
 
         /*In case of closing form*/
@@ -415,7 +415,7 @@ namespace FPDF
             File.Copy(this.PDFpath, this.savePath);
 
             // Open the mail clinet
-            if (this.mailCc == null)
+            if (this.mailCc != null)
             {
                 SendMail(this.tMails.Text, this.mailCc, this.mailSubject, this.pdfTextBox.Text);
             }
