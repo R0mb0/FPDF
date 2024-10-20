@@ -8,6 +8,6 @@
 - [X] Program "save-button" for save files in a specific dir
 - [X] Create a form for the "historic button" to select and open old files.
 - [X] Program "send button" to send via mail the loaded document and save it into database.
-- [ ] Fix Save bug -> no loading screen
+- [X] Fix Save bug -> no loading screen
 - [ ] Fix Load bug -> no loadig screen -> the document isn't always loadable
-- [ ] Fix send bug -> no loadig screen -> Wrong subject in the mail
+- [X] Fix Send bug -> no loadig screen -> Wrong subject in the mail
