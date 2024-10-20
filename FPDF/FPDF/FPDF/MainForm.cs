@@ -236,6 +236,9 @@ namespace FPDF
         /*Save Button*/
         private void bSave_Click(object sender, EventArgs e)
         {
+            //Show loading image
+            this.loading.Show();
+
             //This works great only if the path is in pdf format
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             HtmlConverter.ConvertToPdf(Rtf.ToHtml(this.pdfTextBox.Rtf.ToString()), new FileStream(this.PDFpath, FileMode.Create));
@@ -263,6 +266,9 @@ namespace FPDF
                 MessageBox.Show("Il documento non è stato salvato");
             }
 
+            /*Hide loading images*/
+            this.loading.Hide();
+
             //Manage buttons
             EnableButtons();
             //Disable send buttons
@@ -272,6 +278,8 @@ namespace FPDF
         /*Load olds files*/
         private void bLoad_Click(object sender, EventArgs e)
         {
+            //Show loading image
+            this.loading.Show();
 
             if (this.workInProgress) 
             {
@@ -289,8 +297,6 @@ namespace FPDF
             this.loadForm.ShowDialog();
             this.PDFpath = loadForm.filePath;
 
-            //Show loading image
-            this.loading.Show();
             //Reset boxes
             EraseAll();
 
@@ -322,6 +328,7 @@ namespace FPDF
                     //Enable buttons
                     EnableButtons();
             }
+            /*Hide loading images*/
             this.loading.Hide();
         }
 
@@ -389,6 +396,9 @@ namespace FPDF
         /*Send the document*/
         private void bSend_Click(object sender, EventArgs e)
         {
+            //Show loading image
+            this.loading.Show();
+
             //Set work in progress variable
             this.workInProgress = false;
 
@@ -450,6 +460,9 @@ namespace FPDF
             {
                 MessageBox.Show("Il documento non è stato salvato");
             }
+
+            /*Hide loading images*/
+            this.loading.Hide();
 
             //Manage buttons 
             EnableButtons(); 
