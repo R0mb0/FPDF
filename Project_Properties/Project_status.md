@@ -9,5 +9,5 @@
 - [X] Create a form for the "historic button" to select and open old files.
 - [X] Program "send button" to send via mail the loaded document and save it into database.
 - [X] Fix Save bug -> no loading screen
-- [ ] Fix Load bug -> no loadig screen -> the document isn't always loadable
+- [X] Fix Load bug -> no loadig screen -> the document isn't always loadable
 - [X] Fix Send bug -> no loadig screen -> Wrong subject in the mail
