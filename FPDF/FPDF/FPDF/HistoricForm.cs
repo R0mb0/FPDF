@@ -16,10 +16,14 @@ namespace FPDF
 
         //Fields
         public string filePath { get; set; }
+        public bool loaded { get; set; }
 
         public HistoricForm()
         {
             InitializeComponent();
+
+            // In the case of closing panel
+            loaded = false;
 
             //Read the database for all files
             /*
@@ -51,6 +55,9 @@ namespace FPDF
             try 
             {
                 File.Copy(this.filePath, this.dView.SelectedCells[0].Value.ToString());
+
+                //The file is ready
+                loaded = true;
             }
             catch //(Exception ex) 
             {
@@ -59,6 +66,9 @@ namespace FPDF
                 {
                     File.Delete(this.dView.SelectedCells[0].Value.ToString());
                     File.Copy(this.filePath, this.dView.SelectedCells[0].Value.ToString());
+
+                    //The file is ready
+                    loaded = true;
                 }
                 catch //(Exception ex2)
                 {
@@ -75,6 +85,9 @@ namespace FPDF
             // Load Files inside Teh data grid
             if (Directory.Exists("Sent_Documents") && Directory.GetFiles("Sent_Documents").Length != 0)
             {
+                //At first reset all rows
+                this.dView.Rows.Clear();
+
                 try
                 {
                     foreach (var item in Directory.GetFiles("Sent_Documents"))

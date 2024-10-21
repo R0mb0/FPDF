@@ -291,12 +291,30 @@ namespace FPDF
 
             //Prepare before open form
             this.PDFpath = null;
+            this.loadForm.loaded = false;
 
             //Open new panel
             this.loadForm.UpdateGrid();
             this.loadForm.ShowDialog();
-            this.PDFpath = loadForm.filePath;
 
+            if (this.loadForm.loaded) 
+            {
+                //Rename file for saving purpose
+                this.PDFpath = loadForm.filePath.Remove(0, 20);
+                try
+                {   //Try to rename 
+                    System.IO.File.Move(loadForm.filePath, this.PDFpath);
+                }
+                catch
+                {
+                    //Delete old files
+                    File.Delete(loadForm.filePath);
+                    File.Delete(this.PDFpath);
+                    //Now rename
+                    System.IO.File.Move(loadForm.filePath, this.PDFpath);
+                }
+            }
+            
             //Reset boxes
             EraseAll();
 
@@ -346,6 +364,7 @@ namespace FPDF
 
             //Prepare before open form
             this.PDFpath = null;
+            this.historicForm.loaded = false;
 
             //Open new panel
             this.historicForm.UpdateGrid();
@@ -358,7 +377,7 @@ namespace FPDF
             EraseAll();
 
 
-            if (this.PDFpath != null)
+            if (this.historicForm.loaded && this.PDFpath != null)
             {
                 //Set work in progress variable
                 this.workInProgress = false;
@@ -406,7 +425,6 @@ namespace FPDF
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             HtmlConverter.ConvertToPdf(Rtf.ToHtml(this.pdfTextBox.Rtf.ToString()), new FileStream(this.PDFpath, FileMode.Create));
 
-            //MessageBox.Show("Saved_Documents\\"+DateTime.Now.ToString().Replace("/","-").Replace(" ","_").Replace(":","-")+"_"+this.PDFpath);
             if (!Directory.Exists("Sent_Documents"))
             {
                 Directory.CreateDirectory("Sent_Documents");

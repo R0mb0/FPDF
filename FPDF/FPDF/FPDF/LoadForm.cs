@@ -34,6 +34,10 @@ namespace FPDF
             try 
             {
                 File.Copy(this.filePath, this.dView.SelectedCells[0].Value.ToString());
+
+                //Set that the file is available and remove the old file
+                loaded = true;
+                File.Delete(this.filePath);
             }
             catch //(Exception ex) 
             {
@@ -42,14 +46,16 @@ namespace FPDF
                 {
                     File.Delete(this.dView.SelectedCells[0].Value.ToString());
                     File.Copy(this.filePath, this.dView.SelectedCells[0].Value.ToString());
+
+                    //Set that the file is available and remove the old file
+                    loaded = true;
+                    File.Delete(this.filePath);
                 }
                 catch //(Exception ex2)
                 {
                     MessageBox.Show("Errore durante la gestione dei file", "Errore gestione file", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
-                loaded = true;
-                File.Delete(this.filePath);
             }
             this.filePath = this.dView.SelectedCells[0].Value.ToString();
             this.Close();
@@ -87,6 +93,9 @@ namespace FPDF
             // Load Files inside Teh data grid
             if (Directory.Exists("New_Documents_Example") && Directory.GetFiles("New_Documents_Example").Length != 0)
             {
+                //At first reset all rows
+                this.dView.Rows.Clear();
+
                 try
                 {
                     foreach (var item in Directory.GetFiles("Saved_Documents"))
