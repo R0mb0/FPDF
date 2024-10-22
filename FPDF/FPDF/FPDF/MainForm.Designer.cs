@@ -185,7 +185,7 @@
             // loading
             // 
             this.loading.Image = ((System.Drawing.Image)(resources.GetObject("loading.Image")));
-            this.loading.Location = new System.Drawing.Point(75, 79);
+            this.loading.Location = new System.Drawing.Point(84, 53);
             this.loading.Name = "loading";
             this.loading.Size = new System.Drawing.Size(438, 285);
             this.loading.TabIndex = 9;
