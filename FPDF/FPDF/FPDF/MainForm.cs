@@ -239,7 +239,7 @@ namespace FPDF
             //Show loading image
             this.loading.Show();
 
-            //This works great only if the path is in pdf format
+            //This works great only if the path is for a pdf file
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             HtmlConverter.ConvertToPdf(Rtf.ToHtml(this.pdfTextBox.Rtf.ToString()), new FileStream(this.PDFpath, FileMode.Create));
 
