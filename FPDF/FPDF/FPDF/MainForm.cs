@@ -90,7 +90,7 @@ namespace FPDF
             return builder.ToString();
         }
 
-        /*Check is a string starts with the strings to check */
+        /*Check if a string starts with the strings to check */
         private bool stringStartsWith(string stringtoCheck, string[] stringsToChecks) 
         {
             foreach (var item in stringsToChecks)
