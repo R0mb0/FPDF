@@ -2,6 +2,8 @@
 
 ![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=csharp&logoColor=black)
 
+[![Compilation Test](https://github.com/R0mb0/FPDF/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/R0mb0/FPDF/actions/workflows/dotnet-desktop.yml)
+
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/7b48239ac2934410ba299c491f91c392)](https://app.codacy.com/gh/R0mb0/FPDF/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/R0mb0/FPDF)
