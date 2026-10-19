@@ -94,7 +94,7 @@
       <HintPath>..\packages\itext.8.0.5\lib\net461\itext.svg.dll</HintPath>
     </Reference>
     <Reference Include="MessagePack, Version=2.5.0.0, Culture=neutral, PublicKeyToken=b4a0369545f0a1be">
-      <HintPath>..\packages\MessagePack.2.5.301\lib\net472\MessagePack.dll</HintPath>
+      <HintPath>..\packages\MessagePack.2.5.303\lib\net472\MessagePack.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MessagePack.Annotations, Version=3.1.7.0, Culture=neutral, PublicKeyToken=b4a0369545f0a1be">
